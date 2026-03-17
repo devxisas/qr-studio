@@ -117,6 +117,27 @@ trait HasQrCode
     }
 
     /**
+     * Generate the QR code and save it to a filesystem disk.
+     *
+     * Uses the disk and path from config('qr-studio.disk') and config('qr-studio.path')
+     * by default. If $filename has no directory component, the configured path is prepended.
+     *
+     * @param  string       $filename  Storage path (e.g. 'user-42.png' or 'contacts/user-42.png')
+     * @param  string|null  $disk      Filesystem disk. Null = use package config default
+     * @param  Format       $format    Output format. Defaults to PNG (best for saved files)
+     * @return string                  The storage path where the file was saved
+     */
+    public function saveQrCodeToDisk(string $filename, ?string $disk = null, Format $format = Format::Png): string
+    {
+        $generator = QrCode::format($format);
+
+        $data = $this->qrCodeData();
+        $text = is_array($data) ? (string) $this->resolveDataType($data) : $data;
+
+        return $generator->saveToDisk($text, $filename, $disk);
+    }
+
+    /**
      * Builds the generator and dispatches to the correct generation path.
      *
      * @return HtmlString|string|null
@@ -151,7 +172,7 @@ trait HasQrCode
      *
      * @param  array<string, string>  $data
      */
-    private function resolveDataType(array $data): string
+    protected function resolveDataType(array $data): string
     {
         if ($this->qrCodeType() === 'text') {
             throw new BadMethodCallException(

@@ -39,6 +39,9 @@ use Devxisas\QrStudio\Enums\EyeStyle;
 use Devxisas\QrStudio\Enums\Format;
 use Devxisas\QrStudio\Enums\GradientType;
 use Devxisas\QrStudio\Enums\Style;
+use Devxisas\QrStudio\Enums\Theme;
+use Devxisas\QrStudio\Themes\Themes;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 use InvalidArgumentException;
 
@@ -54,6 +57,12 @@ class QrCodeGenerator
     protected ErrorCorrection $defaultErrorCorrection = ErrorCorrection::Medium;
 
     protected string $defaultEncoding = Encoder::DEFAULT_BYTE_MODE_ENCODING;
+
+    protected string $defaultTheme = '';
+
+    protected string $defaultDisk = 'local';
+
+    protected string $defaultPath = 'qrcodes';
 
     // Current state
     protected Format $format;
@@ -121,6 +130,23 @@ class QrCodeGenerator
             $this->defaultEncoding = strtoupper($defaults['encoding']);
         }
 
+        if (isset($defaults['theme'])) {
+            $theme = $defaults['theme'];
+            if ($theme instanceof Theme) {
+                $this->defaultTheme = $theme->value;
+            } elseif (is_string($theme) && $theme !== '') {
+                $this->defaultTheme = strtolower($theme);
+            }
+        }
+
+        if (isset($defaults['disk']) && is_string($defaults['disk']) && $defaults['disk'] !== '') {
+            $this->defaultDisk = $defaults['disk'];
+        }
+
+        if (isset($defaults['path']) && is_string($defaults['path'])) {
+            $this->defaultPath = trim($defaults['path'], '/');
+        }
+
         return $this->reset();
     }
 
@@ -145,6 +171,10 @@ class QrCodeGenerator
         $this->gradient = null;
         $this->imageMerge = null;
         $this->imagePercentage = 0.2;
+
+        if ($this->defaultTheme !== '') {
+            $this->applyTheme($this->defaultTheme);
+        }
 
         return $this;
     }
@@ -215,6 +245,60 @@ class QrCodeGenerator
         $this->reset();
 
         return $format->dataUriPrefix().base64_encode($qrCode);
+    }
+
+    /**
+     * Applies a built-in visual theme to the current QR code.
+     *
+     * Themes are predefined combinations of colors, gradient, module style, and eye style.
+     * Any option set after theme() overrides the theme's defaults.
+     *
+     * Available themes: ocean, sunset, forest, midnight, coral
+     *
+     * @throws InvalidArgumentException if the theme name is not recognised
+     */
+    public function theme(Theme|string $theme): static
+    {
+        $name = $theme instanceof Theme ? $theme->value : strtolower((string) $theme);
+        $this->applyTheme($name);
+
+        return $this;
+    }
+
+    /**
+     * Generates the QR code and saves it to a filesystem disk.
+     *
+     * Uses the disk and path configured in config/qr-studio.php by default.
+     * If $filename contains no '/', the configured 'path' is prepended automatically.
+     *
+     * @param  string       $text      The content to encode
+     * @param  string       $filename  Relative path on the disk (e.g. 'qr.png' or 'invoices/2025/qr.png')
+     * @param  string|null  $disk      Filesystem disk name. Null = use config('qr-studio.disk')
+     * @return string                  The full storage path where the file was saved
+     *
+     * @throws WriterException
+     */
+    public function saveToDisk(string $text, string $filename, ?string $disk = null): string
+    {
+        $useDisk = $disk ?? $this->defaultDisk;
+
+        // Prepend the default directory when the filename has no path component
+        $storagePath = str_contains($filename, '/')
+            ? $filename
+            : $this->defaultPath.'/'.$filename;
+
+        $qrCode = $this->getWriter($this->buildRenderer())->writeString($text, $this->encoding, $this->errorCorrection);
+
+        if ($this->imageMerge !== null && $this->format === Format::Png) {
+            $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
+            $qrCode = $merger->merge($this->imagePercentage);
+        }
+
+        Storage::disk($useDisk)->put($storagePath, $qrCode);
+
+        $this->reset();
+
+        return $storagePath;
     }
 
     /**
@@ -544,6 +628,47 @@ class QrCodeGenerator
         }
 
         return new Alpha($alpha, new Rgb($red, $green, $blue));
+    }
+
+    /**
+     * Applies a theme's settings to the current generator state.
+     * Called by theme() and by reset() for config-driven default themes.
+     */
+    private function applyTheme(string $name): void
+    {
+        $settings = Themes::get($name);
+
+        if (isset($settings['gradient'])) {
+            /** @var array<int, mixed> $g */
+            $g = $settings['gradient'];
+            $this->gradient((int) $g[0], (int) $g[1], (int) $g[2], (int) $g[3], (int) $g[4], (int) $g[5], (string) $g[6]);
+        }
+
+        if (isset($settings['color'])) {
+            /** @var array<int, int> $c */
+            $c = $settings['color'];
+            $this->color((int) $c[0], (int) $c[1], (int) $c[2]);
+        }
+
+        if (isset($settings['backgroundColor'])) {
+            /** @var array<int, int> $bg */
+            $bg = $settings['backgroundColor'];
+            $this->backgroundColor((int) $bg[0], (int) $bg[1], (int) $bg[2]);
+        }
+
+        if (isset($settings['eye'])) {
+            $this->eye((string) $settings['eye']);
+        }
+
+        if (isset($settings['style'])) {
+            /** @var array<int, mixed> $s */
+            $s = $settings['style'];
+            $this->style((string) $s[0], (float) $s[1]);
+        }
+
+        if (isset($settings['errorCorrection'])) {
+            $this->errorCorrection((string) $settings['errorCorrection']);
+        }
     }
 
     protected function createClass(string $method): DataTypeInterface

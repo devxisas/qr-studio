@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Devxisas\QrStudio\Enums\ErrorCorrection;
 use Devxisas\QrStudio\Enums\Format;
+use Devxisas\QrStudio\Enums\Theme;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,5 +77,45 @@ return [
     |
     */
     'encoding' => 'UTF-8',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Theme
+    |--------------------------------------------------------------------------
+    |
+    | Apply a built-in visual theme to every QR code by default.
+    | Set to null to disable. Override per call with ->theme('ocean').
+    |
+    | Available: 'ocean', 'sunset', 'forest', 'midnight', 'coral'
+    |            or use the Theme enum: Theme::Ocean, Theme::Sunset, etc.
+    |
+    */
+    'theme' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Storage Disk
+    |--------------------------------------------------------------------------
+    |
+    | The filesystem disk used by saveToDisk() when no disk is specified.
+    | Corresponds to a disk defined in config/filesystems.php.
+    |
+    | Examples: 'local', 's3', 'public'
+    |
+    */
+    'disk' => 'local',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Storage Path
+    |--------------------------------------------------------------------------
+    |
+    | Default directory used by saveToDisk() when the filename has no
+    | directory component (i.e. does not contain '/').
+    |
+    | Examples: 'qrcodes', 'media/qr', 'invoices/qr'
+    |
+    */
+    'path' => 'qrcodes',
 
 ];
