@@ -1,11 +1,16 @@
 {
     "name": "devxisas/laravel-qrcode",
-    "description": "A QR code generator package for Laravel.",
+    "description": "A modern QR code generator for Laravel with SVG, PNG, EPS support, enums, Blade directive, response macro, and data types.",
     "keywords": [
         "laravel",
         "qrcode",
         "qr-code",
+        "qr",
         "generator",
+        "svg",
+        "png",
+        "barcode",
+        "bacon-qr-code",
         "devxisas"
     ],
     "homepage": "https://github.com/devxisas/laravel-qrcode",
@@ -13,7 +18,7 @@
     "authors": [
         {
             "name": "Elmer Sorto",
-            "email": "elmer@devxi.com",
+            "email": "elmer@devxisas.com",
             "role": "Developer"
         }
     ],
