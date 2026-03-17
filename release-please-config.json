@@ -3,6 +3,8 @@
     ".": {
       "release-type": "php",
       "package-name": "devxisas/laravel-qrcode",
+      "include-component-in-tag": false,
+      "changelog-path": "CHANGELOG.md",
       "changelog-sections": [
         { "type": "feat",  "section": "Features" },
         { "type": "fix",   "section": "Bug Fixes" },

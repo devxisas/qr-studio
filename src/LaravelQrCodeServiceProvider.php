@@ -62,17 +62,23 @@ class LaravelQrCodeServiceProvider extends PackageServiceProvider
             return "<?php
                 \$__qrArgs = [{$expression}];
                 \$__qrGenerator = app('qrcode');
-                \$__qrFormat = isset(\$__qrArgs[1])
-                    ? (\$__qrArgs[1] instanceof \Devxisas\LaravelQrCode\Enums\Format
+                if (isset(\$__qrArgs[1])) {
+                    \$__qrFormat = \$__qrArgs[1] instanceof \Devxisas\LaravelQrCode\Enums\Format
                         ? \$__qrArgs[1]
-                        : \Devxisas\LaravelQrCode\Enums\Format::from(strtolower((string) \$__qrArgs[1])))
-                    : \Devxisas\LaravelQrCode\Enums\Format::Svg;
-                \$__qrGenerator->format(\$__qrFormat);
+                        : \Devxisas\LaravelQrCode\Enums\Format::from(strtolower((string) \$__qrArgs[1]));
+                    \$__qrGenerator->format(\$__qrFormat);
+                } else {
+                    \$__cfgFmt = config('laravel-qrcode.format', 'svg');
+                    \$__qrFormat = \$__cfgFmt instanceof \Devxisas\LaravelQrCode\Enums\Format
+                        ? \$__cfgFmt
+                        : \Devxisas\LaravelQrCode\Enums\Format::from(strtolower((string) \$__cfgFmt));
+                    unset(\$__cfgFmt);
+                }
                 if (isset(\$__qrArgs[2])) { \$__qrGenerator->size((int) \$__qrArgs[2]); }
                 if (\$__qrFormat === \Devxisas\LaravelQrCode\Enums\Format::Svg) {
                     echo \$__qrGenerator->generate((string) \$__qrArgs[0]);
                 } else {
-                    \$__qrSize = isset(\$__qrArgs[2]) ? (int) \$__qrArgs[2] : 200;
+                    \$__qrSize = isset(\$__qrArgs[2]) ? (int) \$__qrArgs[2] : (int) config('laravel-qrcode.size', 200);
                     echo '<img src=\"' . \$__qrGenerator->toDataUri((string) \$__qrArgs[0]) . '\" width=\"' . \$__qrSize . '\" height=\"' . \$__qrSize . '\" alt=\"QR Code\">';
                 }
                 unset(\$__qrArgs, \$__qrGenerator, \$__qrFormat, \$__qrSize);
@@ -92,8 +98,11 @@ class LaravelQrCodeServiceProvider extends PackageServiceProvider
         Response::macro('qrcode', function (
             string $text,
             Format|string $format = Format::Svg,
-            int $size = 200,
+            int $size = 0,
         ): Response {
+            if ($size === 0) {
+                $size = (int) config('laravel-qrcode.size', 200);
+            }
             /** @var QrCodeGenerator $generator */
             $generator = app('qrcode');
 

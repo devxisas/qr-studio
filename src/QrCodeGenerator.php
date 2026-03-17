@@ -53,6 +53,8 @@ class QrCodeGenerator
 
     protected ErrorCorrection $defaultErrorCorrection = ErrorCorrection::Medium;
 
+    protected string $defaultEncoding = Encoder::DEFAULT_BYTE_MODE_ENCODING;
+
     // Current state
     protected Format $format;
 
@@ -115,6 +117,10 @@ class QrCodeGenerator
                 : ErrorCorrection::from(strtoupper((string) $defaults['error_correction']));
         }
 
+        if (isset($defaults['encoding']) && is_string($defaults['encoding'])) {
+            $this->defaultEncoding = strtoupper($defaults['encoding']);
+        }
+
         return $this->reset();
     }
 
@@ -129,7 +135,7 @@ class QrCodeGenerator
         $this->pixels = $this->defaultPixels;
         $this->margin = $this->defaultMargin;
         $this->errorCorrection = $this->resolveErrorCorrectionLevel($this->defaultErrorCorrection);
-        $this->encoding = Encoder::DEFAULT_BYTE_MODE_ENCODING;
+        $this->encoding = $this->defaultEncoding;
         $this->style = Style::Square;
         $this->styleSize = null;
         $this->eyeStyle = null;

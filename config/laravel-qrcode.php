@@ -5,6 +5,15 @@ declare(strict_types=1);
 use Devxisas\LaravelQrCode\Enums\ErrorCorrection;
 use Devxisas\LaravelQrCode\Enums\Format;
 
+/*
+|--------------------------------------------------------------------------
+| Publish this config file
+|--------------------------------------------------------------------------
+|
+|   php artisan vendor:publish --tag="laravel-qrcode-config"
+|
+*/
+
 return [
 
     /*
@@ -56,5 +65,16 @@ return [
     |
     */
     'error_correction' => ErrorCorrection::Medium,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Character Encoding
+    |--------------------------------------------------------------------------
+    |
+    | The encoding used when writing data into the QR code.
+    | UTF-8 works for virtually all content including URLs, unicode text, etc.
+    |
+    */
+    'encoding' => 'UTF-8',
 
 ];
