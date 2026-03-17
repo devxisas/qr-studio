@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Devxisas\QrStudio\Traits;
 
 use BadMethodCallException;
+use Devxisas\QrStudio\DataTypes\DataTypeInterface;
 use Devxisas\QrStudio\Enums\Format;
 use Devxisas\QrStudio\Facades\QrCode;
+use Illuminate\Support\HtmlString;
 
 /**
  * Adds QR code generation to any Eloquent model.
@@ -98,7 +100,7 @@ trait HasQrCode
     /**
      * Generate the QR code and return it as a data URI (for use in <img src="...">).
      *
-     * @param  int     $size    Width/height in pixels (0 = use package config default)
+     * @param  int  $size  Width/height in pixels (0 = use package config default)
      * @param  Format  $format  Output format — defaults to PNG for data URIs
      */
     public function qrCodeDataUri(int $size = 0, Format $format = Format::Png): string
@@ -117,7 +119,7 @@ trait HasQrCode
     /**
      * Builds the generator and dispatches to the correct generation path.
      *
-     * @return \Illuminate\Support\HtmlString|string|null
+     * @return HtmlString|string|null
      */
     private function buildGenerator(Format $format, int $size): mixed
     {
@@ -163,7 +165,7 @@ trait HasQrCode
             throw new BadMethodCallException("DataType [{$this->qrCodeType()}] does not exist.");
         }
 
-        /** @var \Devxisas\QrStudio\DataTypes\DataTypeInterface $instance */
+        /** @var DataTypeInterface $instance */
         $instance = new $class;
         $instance->create([$data]);
 

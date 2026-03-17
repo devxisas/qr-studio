@@ -22,12 +22,15 @@ class StubContactModel
 {
     use HasQrCode;
 
-    public function qrCodeType(): string { return 'meCard'; }
+    public function qrCodeType(): string
+    {
+        return 'meCard';
+    }
 
     public function qrCodeData(): array
     {
         return [
-            'name'  => 'Sorto,Elmer',
+            'name' => 'Sorto,Elmer',
             'email' => 'elmer@devxi.com',
         ];
     }
