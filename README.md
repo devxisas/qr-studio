@@ -12,7 +12,7 @@ A modern QR code generator for Laravel. Inspired by and built upon the foundatio
 
 ---
 
-<!-- screenshot(basic): QrCode::size(200)->generate('https://devxisas.com') — plain SVG output -->
+![Basic QR code — plain SVG output](docs/images/basic.png)
 
 ---
 
@@ -48,19 +48,19 @@ Use the `QrCode` facade anywhere in your application:
 use Devxisas\LaravelQrCode\Facades\QrCode;
 
 // Generate an SVG (default) — safe to render directly in Blade with {!! !!}
-$svg = QrCode::generate('https://devxisas.com');
+$svg = QrCode::generate('https://devxi.com');
 
 // Save to a file
-QrCode::generate('https://devxisas.com', '/path/to/qrcode.svg');
+QrCode::generate('https://devxi.com', '/path/to/qrcode.svg');
 ```
 
 In a Blade template:
 
 ```blade
-{!! QrCode::size(200)->generate('https://devxisas.com') !!}
+{!! QrCode::size(200)->generate('https://devxi.com') !!}
 ```
 
-<!-- screenshot(basic): QrCode::size(200)->generate('https://devxisas.com') — plain SVG output -->
+![Basic QR code — plain SVG output](docs/images/basic.png)
 
 ---
 
@@ -108,7 +108,7 @@ QrCode::format('eps')->generate('...');           // EPS (vector, no browser pre
 
 > **PNG and the GD fallback:** PNG generation uses `ext-imagick` when available. When Imagick is not installed the package falls back to `ext-gd`. The GD fallback works for most use cases, but gradients are not supported under GD — use Imagick if you need gradient PNGs.
 
-<!-- screenshot(formats): SVG · PNG · EPS cards from the demo -->
+![Output formats — SVG, PNG, EPS](docs/images/formats.png)
 
 ---
 
@@ -118,6 +118,8 @@ QrCode::format('eps')->generate('...');           // EPS (vector, no browser pre
 QrCode::size(300)->generate('...');
 QrCode::size(300)->margin(4)->generate('...');
 ```
+
+![Size and margin variations](docs/images/size-margin.png)
 
 ---
 
@@ -139,7 +141,7 @@ QrCode::errorCorrection(ErrorCorrection::High)->generate('...');
 | `Q`   | `ErrorCorrection::Quartile` | 25%           |
 | `H`   | `ErrorCorrection::High`     | 30%           |
 
-<!-- SCREENSHOT: Four QR codes labeled L / M / Q / H -->
+![Error correction levels L / M / Q / H](docs/images/error-correction.png)
 
 ---
 
@@ -156,7 +158,7 @@ QrCode::style('round', 0.7)->generate('...');
 QrCode::style(Style::Dot, 0.5)->generate('...');
 ```
 
-<!-- screenshot(styles): Square · Dot · Round module styles -->
+![Module styles — Square, Dot, Round](docs/images/styles.png)
 
 ---
 
@@ -180,7 +182,7 @@ QrCode::eye(EyeStyle::Pointy)->generate('...');
 | `circle`   | `EyeStyle::Circle` | Circular finder eye                              |
 | `pointy`   | `EyeStyle::Pointy` | Curved outer corner + circle inner (BaconQrCode 3.x) |
 
-<!-- screenshot(eyes): Square · Circle · Pointy eye styles -->
+![Eye styles — Square, Circle, Pointy](docs/images/eyes.png)
 
 ---
 
@@ -211,7 +213,9 @@ QrCode::eyeColor(0, 239, 68, 68)           // eye 0 — red (inner = outer)
 QrCode::eyeColor(0, 255, 255, 255, 59, 130, 246)->generate('...');
 ```
 
-<!-- screenshot(colors): Color variations including gradients -->
+![Foreground and background colors](docs/images/colors.png)
+
+![Per-eye color customization](docs/images/eye-colors.png)
 
 ---
 
@@ -237,7 +241,7 @@ QrCode::gradient(59, 130, 246, 168, 85, 247, GradientType::Radial)->generate('..
 
 > **Note:** Gradients require `ext-imagick`. They are not supported when falling back to `ext-gd`.
 
-<!-- screenshot(gradients): All 5 gradient types -->
+![Gradient types — horizontal, vertical, diagonal, inverse diagonal, radial](docs/images/gradients.png)
 
 ---
 
@@ -261,7 +265,7 @@ QrCode::format('png')
 
 The second argument is the percentage of the QR code the image should occupy (default `0.2`).
 
-<!-- SCREENSHOT: QR code with logo centered -->
+![Logo overlay on PNG QR code](docs/images/merge.png)
 
 ---
 
@@ -270,19 +274,21 @@ The second argument is the percentage of the QR code the image should occupy (de
 Generates a base64-encoded data URI — ideal for embedding QR codes in emails, PDFs, or anywhere external URLs are unavailable.
 
 ```php
-$uri = QrCode::size(200)->toDataUri('https://devxisas.com');
+$uri = QrCode::size(200)->toDataUri('https://devxi.com');
 // → "data:image/svg+xml;base64,..."
 
 // PNG
-$uri = QrCode::size(200)->format('png')->toDataUri('https://devxisas.com');
+$uri = QrCode::size(200)->format('png')->toDataUri('https://devxi.com');
 // → "data:image/png;base64,..."
 ```
 
 In Blade:
 
 ```blade
-<img src="{{ QrCode::size(200)->toDataUri('https://devxisas.com') }}" alt="QR Code">
+<img src="{{ QrCode::size(200)->toDataUri('https://devxi.com') }}" alt="QR Code">
 ```
+
+![toDataUri — SVG and PNG data URI examples](docs/images/data-uri.png)
 
 ---
 
@@ -292,14 +298,14 @@ A `@qrcode` directive is registered automatically.
 
 ```blade
 {{-- Uses config defaults for format and size --}}
-@qrcode('https://devxisas.com')
+@qrcode('https://devxi.com')
 
 {{-- Override format and size per call --}}
-@qrcode('https://devxisas.com', 'svg', 200)
+@qrcode('https://devxi.com', 'svg', 200)
 
 {{-- Using enums --}}
 @php use Devxisas\LaravelQrCode\Enums\Format; @endphp
-@qrcode('https://devxisas.com', Format::Png, 300)
+@qrcode('https://devxi.com', Format::Png, 300)
 ```
 
 When no `format` argument is passed, the directive reads `laravel-qrcode.format` from config (default `svg`). When no `size` argument is passed, the `<img>` width/height uses `laravel-qrcode.size` from config.
@@ -314,14 +320,14 @@ Stream a QR code directly as an HTTP response with the correct `Content-Type` he
 
 ```php
 // Uses config defaults for format and size
-return response()->qrcode('https://devxisas.com');
+return response()->qrcode('https://devxi.com');
 
 // Override format and size per call
-return response()->qrcode('https://devxisas.com', 'png', 300);
+return response()->qrcode('https://devxi.com', 'png', 300);
 
 // Using enum
 use Devxisas\LaravelQrCode\Enums\Format;
-return response()->qrcode('https://devxisas.com', Format::Png, 300);
+return response()->qrcode('https://devxi.com', Format::Png, 300);
 ```
 
 When `size` is not passed, the macro uses `laravel-qrcode.size` from config. The `X-Content-Type-Options: nosniff` header is always set automatically.
@@ -339,13 +345,13 @@ Generate QR codes from the command line.
 
 ```bash
 # Print SVG to stdout
-php artisan qrcode:generate "https://devxisas.com"
+php artisan qrcode:generate "https://devxi.com"
 
 # Save PNG to a file
-php artisan qrcode:generate "https://devxisas.com" --format=png --output=public/qr.png
+php artisan qrcode:generate "https://devxi.com" --format=png --output=public/qr.png
 
 # All options
-php artisan qrcode:generate "https://devxisas.com" \
+php artisan qrcode:generate "https://devxi.com" \
     --format=svg \
     --size=300 \
     --margin=2 \
@@ -370,7 +376,7 @@ All data types return an `HtmlString` just like `generate()` and follow the same
 ### URL / Plain text
 
 ```php
-QrCode::generate('https://devxisas.com');
+QrCode::generate('https://devxi.com');
 QrCode::generate('Plain text content');
 ```
 
@@ -469,7 +475,7 @@ QrCode::calendarEvent([
 ]);
 ```
 
-<!-- screenshot(data-types): Grid of data type QR codes -->
+![Data types — Email, Phone, SMS, Geo, WiFi, BTC, vCard, MeCard, Calendar](docs/images/data-types.png)
 
 ---
 
@@ -484,7 +490,7 @@ QrCode::size(250)
       ->eye('circle')
       ->gradient(59, 130, 246, 99, 102, 241, 'radial')
       ->errorCorrection('H')
-      ->generate('https://devxisas.com');
+      ->generate('https://devxi.com');
 ```
 
 ```php
@@ -494,10 +500,10 @@ QrCode::size(250)
       ->color(16, 185, 129)
       ->backgroundColor(15, 23, 42)
       ->margin(2)
-      ->generate('https://devxisas.com');
+      ->generate('https://devxi.com');
 ```
 
-<!-- screenshot(combos): Showcase combinations -->
+![Combination examples — dot+gradient, round+color, full dark theme](docs/images/combos.png)
 
 ---
 
@@ -524,10 +530,10 @@ Complete reference for all public methods on `QrCodeGenerator` (accessed via the
 
 ```php
 // Returns HtmlString — embed directly in Blade
-$svg = QrCode::size(200)->generate('https://devxisas.com');
+$svg = QrCode::size(200)->generate('https://devxi.com');
 
 // Write to file — returns null
-QrCode::format('png')->size(300)->generate('https://devxisas.com', '/var/www/qr.png');
+QrCode::format('png')->size(300)->generate('https://devxi.com', '/var/www/qr.png');
 ```
 
 ---
@@ -552,11 +558,11 @@ QrCode::format('png')->size(300)->generate('https://devxisas.com', '/var/www/qr.
 **Example:**
 
 ```php
-$uri = QrCode::size(200)->toDataUri('https://devxisas.com');
+$uri = QrCode::size(200)->toDataUri('https://devxi.com');
 // → "data:image/svg+xml;base64,..."
 
 // In Blade
-<img src="{{ QrCode::size(200)->format('png')->toDataUri('https://devxisas.com') }}" alt="QR">
+<img src="{{ QrCode::size(200)->format('png')->toDataUri('https://devxi.com') }}" alt="QR">
 ```
 
 ---
