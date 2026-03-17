@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\DataTypes\MeCard;
+use Devxisas\QrStudio\DataTypes\MeCard;
 
 it('generates a basic mecard', function () {
     $mecard = new MeCard;

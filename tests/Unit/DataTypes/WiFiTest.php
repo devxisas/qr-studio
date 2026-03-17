@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\DataTypes\WiFi;
+use Devxisas\QrStudio\DataTypes\WiFi;
 
 it('generates a wifi string', function () {
     $wifi = new WiFi;

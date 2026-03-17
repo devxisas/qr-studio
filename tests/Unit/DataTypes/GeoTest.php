@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\DataTypes\Geo;
+use Devxisas\QrStudio\DataTypes\Geo;
 
 it('generates a geo uri', function () {
     $geo = new Geo;

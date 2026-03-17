@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\DataTypes\Email;
+use Devxisas\QrStudio\DataTypes\Email;
 
 it('generates a basic mailto uri', function () {
     $email = new Email;

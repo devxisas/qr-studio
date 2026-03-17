@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\DataTypes\SMS;
+use Devxisas\QrStudio\DataTypes\SMS;
 
 it('generates a sms uri without message', function () {
     $sms = new SMS;

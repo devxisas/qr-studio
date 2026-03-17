@@ -2,7 +2,7 @@
   "packages": {
     ".": {
       "release-type": "php",
-      "package-name": "devxisas/laravel-qrcode",
+      "package-name": "devxisas/qr-studio",
       "include-component-in-tag": false,
       "changelog-path": "CHANGELOG.md",
       "changelog-sections": [

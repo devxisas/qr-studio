@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Devxisas\LaravelQrCode\Tests;
+namespace Devxisas\QrStudio\Tests;
 
-use Devxisas\LaravelQrCode\Facades\QrCode;
-use Devxisas\LaravelQrCode\LaravelQrCodeServiceProvider;
+use Devxisas\QrStudio\Facades\QrCode;
+use Devxisas\QrStudio\QrStudioServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            LaravelQrCodeServiceProvider::class,
+            QrStudioServiceProvider::class,
         ];
     }
 

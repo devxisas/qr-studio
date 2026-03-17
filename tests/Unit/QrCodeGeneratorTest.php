@@ -10,7 +10,7 @@ use BaconQrCode\Renderer\Module\DotsModule;
 use BaconQrCode\Renderer\Module\RoundnessModule;
 use BaconQrCode\Renderer\Module\SquareModule;
 use BaconQrCode\Renderer\RendererStyle\Gradient;
-use Devxisas\LaravelQrCode\QrCodeGenerator;
+use Devxisas\QrStudio\QrCodeGenerator;
 use Illuminate\Support\HtmlString;
 
 it('generates an svg qr code by default', function () {

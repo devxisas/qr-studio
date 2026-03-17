@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\Image;
-use Devxisas\LaravelQrCode\QrCodeGenerator;
+use Devxisas\QrStudio\Image;
+use Devxisas\QrStudio\QrCodeGenerator;
 
 it('creates an image from a png string', function () {
     $png = (new QrCodeGenerator)->format('png')->generate('test');

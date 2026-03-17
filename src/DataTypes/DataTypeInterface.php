@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Devxisas\LaravelQrCode\DataTypes;
+namespace Devxisas\QrStudio\DataTypes;
 
 interface DataTypeInterface
 {

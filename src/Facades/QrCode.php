@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Devxisas\LaravelQrCode\Facades;
+namespace Devxisas\QrStudio\Facades;
 
-use Devxisas\LaravelQrCode\Enums\ErrorCorrection;
-use Devxisas\LaravelQrCode\Enums\EyeStyle;
-use Devxisas\LaravelQrCode\Enums\Format;
-use Devxisas\LaravelQrCode\Enums\GradientType;
-use Devxisas\LaravelQrCode\Enums\Style;
-use Devxisas\LaravelQrCode\QrCodeGenerator;
+use Devxisas\QrStudio\Enums\ErrorCorrection;
+use Devxisas\QrStudio\Enums\EyeStyle;
+use Devxisas\QrStudio\Enums\Format;
+use Devxisas\QrStudio\Enums\GradientType;
+use Devxisas\QrStudio\Enums\Style;
+use Devxisas\QrStudio\QrCodeGenerator;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\HtmlString;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\DataTypes\VCard;
+use Devxisas\QrStudio\DataTypes\VCard;
 
 it('generates a basic vcard', function () {
     $vcard = new VCard;

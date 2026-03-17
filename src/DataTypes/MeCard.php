@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Devxisas\LaravelQrCode\DataTypes;
+namespace Devxisas\QrStudio\DataTypes;
 
 /**
  * Generates a MeCard QR code (widely supported by iOS and Android).

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Devxisas\LaravelQrCode\DataTypes;
+namespace Devxisas\QrStudio\DataTypes;
 
 /**
  * Generates a vCard 3.0 QR code.

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\Enums\ErrorCorrection;
-use Devxisas\LaravelQrCode\Enums\Format;
+use Devxisas\QrStudio\Enums\ErrorCorrection;
+use Devxisas\QrStudio\Enums\Format;
 
 /*
 |--------------------------------------------------------------------------
 | Publish this config file
 |--------------------------------------------------------------------------
 |
-|   php artisan vendor:publish --tag="laravel-qrcode-config"
+|   php artisan vendor:publish --tag="qr-studio-config"
 |
 */
 

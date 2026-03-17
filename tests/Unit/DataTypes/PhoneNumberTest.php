@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\DataTypes\PhoneNumber;
+use Devxisas\QrStudio\DataTypes\PhoneNumber;
 
 it('generates a tel uri', function () {
     $phone = new PhoneNumber;

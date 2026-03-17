@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Devxisas\LaravelQrCode;
+namespace Devxisas\QrStudio;
 
 use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Encoder\Encoder;
@@ -33,12 +33,12 @@ use BaconQrCode\Renderer\RendererStyle\GradientType as BaconGradientType;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use BadMethodCallException;
-use Devxisas\LaravelQrCode\DataTypes\DataTypeInterface;
-use Devxisas\LaravelQrCode\Enums\ErrorCorrection;
-use Devxisas\LaravelQrCode\Enums\EyeStyle;
-use Devxisas\LaravelQrCode\Enums\Format;
-use Devxisas\LaravelQrCode\Enums\GradientType;
-use Devxisas\LaravelQrCode\Enums\Style;
+use Devxisas\QrStudio\DataTypes\DataTypeInterface;
+use Devxisas\QrStudio\Enums\ErrorCorrection;
+use Devxisas\QrStudio\Enums\EyeStyle;
+use Devxisas\QrStudio\Enums\Format;
+use Devxisas\QrStudio\Enums\GradientType;
+use Devxisas\QrStudio\Enums\Style;
 use Illuminate\Support\HtmlString;
 use InvalidArgumentException;
 
@@ -559,7 +559,7 @@ class QrCodeGenerator
 
     protected function formatClass(string $method): string
     {
-        return 'Devxisas\\LaravelQrCode\\DataTypes\\'.ucfirst($method);
+        return 'Devxisas\\QrStudio\\DataTypes\\'.ucfirst($method);
     }
 
     protected function resolveErrorCorrectionLevel(ErrorCorrection $level): ErrorCorrectionLevel

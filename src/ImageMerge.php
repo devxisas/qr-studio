@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Devxisas\LaravelQrCode;
+namespace Devxisas\QrStudio;
 
 use InvalidArgumentException;
 

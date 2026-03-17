@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\DataTypes\BTC;
+use Devxisas\QrStudio\DataTypes\BTC;
 
 it('generates a bitcoin uri with address only', function () {
     $btc = new BTC;

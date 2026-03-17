@@ -1,11 +1,12 @@
 {
-    "name": "devxisas/laravel-qrcode",
-    "description": "A modern QR code generator for Laravel with SVG, PNG, EPS support, enums, Blade directive, response macro, and data types.",
+    "name": "devxisas/qr-studio",
+    "description": "A modern QR code studio for Laravel — SVG, PNG, EPS, styles, gradients, data types, Blade directive, response macro, and model traits.",
     "keywords": [
         "laravel",
         "qrcode",
         "qr-code",
         "qr",
+        "qr-studio",
         "generator",
         "svg",
         "png",
@@ -13,7 +14,7 @@
         "bacon-qr-code",
         "devxisas"
     ],
-    "homepage": "https://github.com/devxisas/laravel-qrcode",
+    "homepage": "https://github.com/devxisas/qr-studio",
     "license": "MIT",
     "authors": [
         {
@@ -45,12 +46,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Devxisas\\LaravelQrCode\\": "src/"
+            "Devxisas\\QrStudio\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Devxisas\\LaravelQrCode\\Tests\\": "tests/"
+            "Devxisas\\QrStudio\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -71,10 +72,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Devxisas\\LaravelQrCode\\LaravelQrCodeServiceProvider"
+                "Devxisas\\QrStudio\\QrStudioServiceProvider"
             ],
             "aliases": {
-                "QrCode": "Devxisas\\LaravelQrCode\\Facades\\QrCode"
+                "QrCode": "Devxisas\\QrStudio\\Facades\\QrCode"
             }
         }
     },

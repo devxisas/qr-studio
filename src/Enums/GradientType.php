@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Devxisas\LaravelQrCode\Enums;
+namespace Devxisas\QrStudio\Enums;
 
 enum GradientType: string
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Devxisas\LaravelQrCode\Commands;
+namespace Devxisas\QrStudio\Commands;
 
-use Devxisas\LaravelQrCode\Enums\ErrorCorrection;
-use Devxisas\LaravelQrCode\Enums\Format;
-use Devxisas\LaravelQrCode\QrCodeGenerator;
+use Devxisas\QrStudio\Enums\ErrorCorrection;
+use Devxisas\QrStudio\Enums\Format;
+use Devxisas\QrStudio\QrCodeGenerator;
 use Illuminate\Console\Command;
 use InvalidArgumentException;
 

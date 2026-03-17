@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\Image;
-use Devxisas\LaravelQrCode\ImageMerge;
-use Devxisas\LaravelQrCode\QrCodeGenerator;
+use Devxisas\QrStudio\Image;
+use Devxisas\QrStudio\ImageMerge;
+use Devxisas\QrStudio\QrCodeGenerator;
 
 function makePng(int $width, int $height): string
 {

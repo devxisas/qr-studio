@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Devxisas\LaravelQrCode\DataTypes\CalendarEvent;
+use Devxisas\QrStudio\DataTypes\CalendarEvent;
 
 it('generates a basic calendar event', function () {
     $event = new CalendarEvent;
