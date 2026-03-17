@@ -38,14 +38,6 @@ To install Imagick for best PNG quality:
 composer require ext-imagick
 ```
 
-### Publish the config (optional)
-
-```bash
-php artisan vendor:publish --tag="laravel-qrcode-config"
-```
-
-This creates `config/laravel-qrcode.php` where you can set package-wide defaults.
-
 ---
 
 ## Basic Usage
@@ -74,15 +66,30 @@ In a Blade template:
 
 ## Configuration
 
+Publish the config file to set package-wide defaults:
+
+```bash
+php artisan vendor:publish --tag="laravel-qrcode-config"
+```
+
+This creates `config/laravel-qrcode.php`:
+
 ```php
-// config/laravel-qrcode.php
+use Devxisas\LaravelQrCode\Enums\ErrorCorrection;
+use Devxisas\LaravelQrCode\Enums\Format;
+
 return [
-    'format'           => 'svg',   // svg | eps | png
-    'size'             => 200,
-    'margin'           => 0,
-    'error_correction' => 'M',     // L | M | Q | H
+    'format'           => Format::Svg,           // Format enum or 'svg' | 'eps' | 'png'
+    'size'             => 100,                    // pixels
+    'margin'           => 0,                      // quiet zone around the code
+    'error_correction' => ErrorCorrection::Medium, // enum or 'L' | 'M' | 'Q' | 'H'
+    'encoding'         => 'UTF-8',               // character encoding
 ];
 ```
+
+These defaults are applied to every QR code generated through the `QrCode` facade, the `@qrcode` Blade directive, and the `response()->qrcode()` macro. Per-call options always take precedence over config defaults.
+
+> **Scope of defaults:** `format`, `size`, `margin`, `error_correction`, and `encoding` can be set globally. Options like `style`, `eye`, `color`, and `gradient` are always set per call since they are visual choices that vary per use case.
 
 ---
 
@@ -284,15 +291,20 @@ In Blade:
 A `@qrcode` directive is registered automatically.
 
 ```blade
+{{-- Uses config defaults for format and size --}}
 @qrcode('https://devxisas.com')
 
-{{-- With format and size --}}
+{{-- Override format and size per call --}}
 @qrcode('https://devxisas.com', 'svg', 200)
 
 {{-- Using enums --}}
 @php use Devxisas\LaravelQrCode\Enums\Format; @endphp
 @qrcode('https://devxisas.com', Format::Png, 300)
 ```
+
+When no `format` argument is passed, the directive reads `laravel-qrcode.format` from config (default `svg`). When no `size` argument is passed, the `<img>` width/height uses `laravel-qrcode.size` from config.
+
+SVG output is echoed directly as HTML. PNG and EPS output is wrapped in an `<img src="data:...">` tag automatically so no raw binary reaches the browser.
 
 ---
 
@@ -301,15 +313,22 @@ A `@qrcode` directive is registered automatically.
 Stream a QR code directly as an HTTP response with the correct `Content-Type` header.
 
 ```php
-// In a controller
+// Uses config defaults for format and size
 return response()->qrcode('https://devxisas.com');
 
-// With format and size
+// Override format and size per call
 return response()->qrcode('https://devxisas.com', 'png', 300);
 
 // Using enum
 use Devxisas\LaravelQrCode\Enums\Format;
 return response()->qrcode('https://devxisas.com', Format::Png, 300);
+```
+
+When `size` is not passed, the macro uses `laravel-qrcode.size` from config. The `X-Content-Type-Options: nosniff` header is always set automatically.
+
+```php
+// Route example
+Route::get('/qr/{url}', fn (string $url) => response()->qrcode($url, 'png'));
 ```
 
 ---
