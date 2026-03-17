@@ -25,14 +25,14 @@ it('generates a full mecard with all fields', function () {
         'name' => 'Sorto,Elmer',
         'phone' => '+50312345678',
         'email' => 'elmer@devxi.com',
-        'url' => 'https://devxisas.com',
+        'url' => 'https://devxi.com',
         'note' => 'Test note',
     ]]);
 
     $output = (string) $mecard;
 
     expect($output)->toContain('EMAIL:elmer@devxi.com;');
-    expect($output)->toContain('URL:https\://devxisas.com;');
+    expect($output)->toContain('URL:https://devxi.com;');
     expect($output)->toContain('NOTE:Test note;');
 });
 
