@@ -43,26 +43,41 @@ class QrCodeGenerator
 {
     // Defaults — optionally overridden via config in the ServiceProvider
     protected Format $defaultFormat = Format::Svg;
+
     protected int $defaultPixels = 100;
+
     protected int $defaultMargin = 0;
+
     protected ErrorCorrection $defaultErrorCorrection = ErrorCorrection::Medium;
 
     // Current state
     protected Format $format;
+
     protected int $pixels;
+
     protected int $margin;
+
     protected ?ErrorCorrectionLevel $errorCorrection = null;
+
     protected string $encoding = Encoder::DEFAULT_BYTE_MODE_ECODING;
+
     protected Style $style = Style::Square;
+
     protected ?float $styleSize = null;
+
     protected ?EyeStyle $eyeStyle = null;
+
     protected ?ColorInterface $color = null;
+
     protected ?ColorInterface $backgroundColor = null;
 
     /** @var array<int, EyeFill> */
     protected array $eyeColors = [];
+
     protected ?Gradient $gradient = null;
+
     protected ?string $imageMerge = null;
+
     protected float $imagePercentage = 0.2;
 
     public function __construct()

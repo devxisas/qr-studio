@@ -23,10 +23,15 @@ use InvalidArgumentException;
 class CalendarEvent implements DataTypeInterface
 {
     private string $summary = '';
+
     private string $start = '';
+
     private string $end = '';
+
     private string $location = '';
+
     private string $description = '';
+
     private string $url = '';
 
     /** @param  array<int, mixed>  $arguments */

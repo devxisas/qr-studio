@@ -49,6 +49,7 @@ class LaravelQrCodeServiceProvider extends PackageServiceProvider
      * Registers @qrcode blade directive.
      *
      * Usage:
+     *
      *   @qrcode('https://devxisas.com')
      *   @qrcode('https://devxisas.com', Format::Svg, 200)
      */

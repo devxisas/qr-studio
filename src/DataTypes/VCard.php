@@ -22,12 +22,19 @@ namespace Devxisas\LaravelQrCode\DataTypes;
 class VCard implements DataTypeInterface
 {
     private string $name = '';
+
     private string $email = '';
+
     private string $phone = '';
+
     private string $org = '';
+
     private string $title = '';
+
     private string $url = '';
+
     private string $address = '';
+
     private string $note = '';
 
     /** @param  array<int, mixed>  $arguments */

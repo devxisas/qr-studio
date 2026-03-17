@@ -20,10 +20,15 @@ namespace Devxisas\LaravelQrCode\DataTypes;
 class MeCard implements DataTypeInterface
 {
     private string $name = '';
+
     private string $phone = '';
+
     private string $email = '';
+
     private string $url = '';
+
     private string $address = '';
+
     private string $note = '';
 
     /** @param  array<int, mixed>  $arguments */
