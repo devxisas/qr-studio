@@ -416,7 +416,7 @@ class QrCodeGenerator
      */
     public function merge(string $filepath, float $percentage = 0.2, bool $absolute = false): static
     {
-        if (function_exists('base_path') && ! $absolute) {
+        if (function_exists('base_path') && ! $absolute && ! str_starts_with($filepath, '/')) {
             $filepath = base_path().$filepath;
         }
 
