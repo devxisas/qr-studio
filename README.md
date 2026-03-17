@@ -428,7 +428,7 @@ QrCode::errorCorrection('H')->vCard([
     'phone'   => '+50312345678',
     'org'     => 'Devxisas',
     'title'   => 'Developer',
-    'url'     => 'https://devxisas.com',
+    'url'     => 'https://devxi.com',
     'address' => 'San Salvador, El Salvador',  // optional
     'note'    => 'Some note',                   // optional
 ]);
@@ -441,7 +441,7 @@ QrCode::meCard([
     'name'    => 'Sorto,Elmer',
     'phone'   => '+50312345678',
     'email'   => 'elmer@devxi.com',
-    'url'     => 'https://devxisas.com',
+    'url'     => 'https://devxi.com',
     'address' => 'San Salvador',   // optional
     'note'    => 'Some note',      // optional
 ]);

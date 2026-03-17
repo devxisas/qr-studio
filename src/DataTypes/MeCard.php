@@ -12,7 +12,7 @@ namespace Devxisas\LaravelQrCode\DataTypes;
  *       'name'    => 'Sorto,Elmer',   // Surname,Given
  *       'phone'   => '+50312345678',
  *       'email'   => 'elmer@devxi.com',
- *       'url'     => 'https://devxisas.com',
+ *       'url'     => 'https://devxi.com',
  *       'address' => 'San Salvador\,El Salvador',
  *       'note'    => 'Any note',
  *   ])
@@ -43,7 +43,7 @@ class MeCard implements DataTypeInterface
         $this->name = $this->escape((string) ($data['name'] ?? ''));
         $this->phone = $this->escape((string) ($data['phone'] ?? ''));
         $this->email = $this->escape((string) ($data['email'] ?? ''));
-        $this->url = $this->escape((string) ($data['url'] ?? ''));
+        $this->url = (string) ($data['url'] ?? ''); // URLs must not be escaped — colons are structural
         $this->address = $this->escape((string) ($data['address'] ?? ''));
         $this->note = $this->escape((string) ($data['note'] ?? ''));
     }
