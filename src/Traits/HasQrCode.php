@@ -68,7 +68,7 @@ trait HasQrCode
     /**
      * Generate the QR code and return it as a data URI (suitable for <img src="...">).
      *
-     * @param  int     $size    Width/height in pixels (defaults to the package config size)
+     * @param  int  $size  Width/height in pixels (defaults to the package config size)
      * @param  Format  $format  Output format (defaults to PNG for data URIs)
      */
     public function qrCodeDataUri(int $size = 0, Format $format = Format::Png): string
