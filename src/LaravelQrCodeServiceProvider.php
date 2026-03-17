@@ -56,14 +56,26 @@ class LaravelQrCodeServiceProvider extends PackageServiceProvider
     private function registerBladeDirective(): void
     {
         Blade::directive('qrcode', function (string $expression): string {
-            // Split expression into (text, format, size) — format and size are optional
+            // Split expression into (text, format, size) — format and size are optional.
+            // SVG is echoed directly as HTML; PNG is wrapped in <img src="data:..."> since
+            // raw binary cannot be embedded inline in HTML.
             return "<?php
                 \$__qrArgs = [{$expression}];
                 \$__qrGenerator = app('qrcode');
-                if (isset(\$__qrArgs[1])) { \$__qrGenerator->format(\$__qrArgs[1]); }
+                \$__qrFormat = isset(\$__qrArgs[1])
+                    ? (\$__qrArgs[1] instanceof \Devxisas\LaravelQrCode\Enums\Format
+                        ? \$__qrArgs[1]
+                        : \Devxisas\LaravelQrCode\Enums\Format::from(strtolower((string) \$__qrArgs[1])))
+                    : \Devxisas\LaravelQrCode\Enums\Format::Svg;
+                \$__qrGenerator->format(\$__qrFormat);
                 if (isset(\$__qrArgs[2])) { \$__qrGenerator->size((int) \$__qrArgs[2]); }
-                echo \$__qrGenerator->generate((string) \$__qrArgs[0]);
-                unset(\$__qrArgs, \$__qrGenerator);
+                if (\$__qrFormat === \Devxisas\LaravelQrCode\Enums\Format::Svg) {
+                    echo \$__qrGenerator->generate((string) \$__qrArgs[0]);
+                } else {
+                    \$__qrSize = isset(\$__qrArgs[2]) ? (int) \$__qrArgs[2] : 200;
+                    echo '<img src=\"' . \$__qrGenerator->toDataUri((string) \$__qrArgs[0]) . '\" width=\"' . \$__qrSize . '\" height=\"' . \$__qrSize . '\" alt=\"QR Code\">';
+                }
+                unset(\$__qrArgs, \$__qrGenerator, \$__qrFormat, \$__qrSize);
             ?>";
         });
     }
