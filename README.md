@@ -423,8 +423,8 @@ QrCode::btc('1A1zP1eP5QGefi2DMPTfTL5SLmv7Divf', '0.001', [
 
 ```php
 QrCode::errorCorrection('H')->vCard([
-    'name'    => 'Hernandez;Elmer',   // LastName;FirstName
-    'email'   => 'elmer@devxisas.com',
+    'name'    => 'Sorto;Elmer',   // LastName;FirstName
+    'email'   => 'elmer@devxi.com',
     'phone'   => '+50312345678',
     'org'     => 'Devxisas',
     'title'   => 'Developer',
@@ -438,9 +438,9 @@ QrCode::errorCorrection('H')->vCard([
 
 ```php
 QrCode::meCard([
-    'name'    => 'Hernandez,Elmer',
+    'name'    => 'Sorto,Elmer',
     'phone'   => '+50312345678',
-    'email'   => 'elmer@devxisas.com',
+    'email'   => 'elmer@devxi.com',
     'url'     => 'https://devxisas.com',
     'address' => 'San Salvador',   // optional
     'note'    => 'Some note',      // optional

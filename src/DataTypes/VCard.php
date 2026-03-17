@@ -9,8 +9,8 @@ namespace Devxisas\LaravelQrCode\DataTypes;
  *
  * Usage:
  *   QrCode::vCard([
- *       'name'       => 'Hernandez;Elmer',   // Last;First
- *       'email'      => 'elmer@devxisas.com',
+ *       'name'       => 'Sorto;Elmer',   // Last;First
+ *       'email'      => 'elmer@devxi.com',
  *       'phone'      => '+50312345678',
  *       'org'        => 'Devxisas',
  *       'title'      => 'Developer',

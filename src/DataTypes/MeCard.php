@@ -9,9 +9,9 @@ namespace Devxisas\LaravelQrCode\DataTypes;
  *
  * Usage:
  *   QrCode::meCard([
- *       'name'    => 'Hernandez,Elmer',   // Surname,Given
+ *       'name'    => 'Sorto,Elmer',   // Surname,Given
  *       'phone'   => '+50312345678',
- *       'email'   => 'elmer@devxisas.com',
+ *       'email'   => 'elmer@devxi.com',
  *       'url'     => 'https://devxisas.com',
  *       'address' => 'San Salvador\,El Salvador',
  *       'note'    => 'Any note',

@@ -7,24 +7,24 @@ use Devxisas\LaravelQrCode\DataTypes\VCard;
 it('generates a basic vcard', function () {
     $vcard = new VCard;
     $vcard->create([[
-        'name' => 'Hernandez;Elmer',
-        'email' => 'elmer@devxisas.com',
+        'name' => 'Sorto;Elmer',
+        'email' => 'elmer@devxi.com',
     ]]);
 
     $output = (string) $vcard;
 
     expect($output)->toContain('BEGIN:VCARD');
     expect($output)->toContain('VERSION:3.0');
-    expect($output)->toContain('N:Hernandez\;Elmer');
-    expect($output)->toContain('EMAIL:elmer@devxisas.com');
+    expect($output)->toContain('N:Sorto\;Elmer');
+    expect($output)->toContain('EMAIL:elmer@devxi.com');
     expect($output)->toContain('END:VCARD');
 });
 
 it('generates a full vcard with all fields', function () {
     $vcard = new VCard;
     $vcard->create([[
-        'name' => 'Hernandez;Elmer',
-        'email' => 'elmer@devxisas.com',
+        'name' => 'Sorto;Elmer',
+        'email' => 'elmer@devxi.com',
         'phone' => '+50312345678',
         'org' => 'Devxisas',
         'title' => 'Developer',

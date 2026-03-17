@@ -7,14 +7,14 @@ use Devxisas\LaravelQrCode\DataTypes\MeCard;
 it('generates a basic mecard', function () {
     $mecard = new MeCard;
     $mecard->create([[
-        'name' => 'Hernandez,Elmer',
+        'name' => 'Sorto,Elmer',
         'phone' => '+50312345678',
     ]]);
 
     $output = (string) $mecard;
 
     expect($output)->toStartWith('MECARD:');
-    expect($output)->toContain('N:Hernandez,Elmer;');
+    expect($output)->toContain('N:Sorto,Elmer;');
     expect($output)->toContain('TEL:+50312345678;');
     expect($output)->toEndWith(';;');
 });
@@ -22,16 +22,16 @@ it('generates a basic mecard', function () {
 it('generates a full mecard with all fields', function () {
     $mecard = new MeCard;
     $mecard->create([[
-        'name' => 'Hernandez,Elmer',
+        'name' => 'Sorto,Elmer',
         'phone' => '+50312345678',
-        'email' => 'elmer@devxisas.com',
+        'email' => 'elmer@devxi.com',
         'url' => 'https://devxisas.com',
         'note' => 'Test note',
     ]]);
 
     $output = (string) $mecard;
 
-    expect($output)->toContain('EMAIL:elmer@devxisas.com;');
+    expect($output)->toContain('EMAIL:elmer@devxi.com;');
     expect($output)->toContain('URL:https\://devxisas.com;');
     expect($output)->toContain('NOTE:Test note;');
 });

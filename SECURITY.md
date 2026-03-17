@@ -10,7 +10,7 @@
 
 Please **do not** open a public GitHub issue for security vulnerabilities.
 
-Report them privately by emailing **elmer@devxisas.com** with:
+Report them privately by emailing **elmer@devxi.com** with:
 
 - A description of the vulnerability
 - Steps to reproduce or a proof-of-concept
