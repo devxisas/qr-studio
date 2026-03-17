@@ -4,66 +4,96 @@ declare(strict_types=1);
 
 use Devxisas\QrStudio\Traits\HasQrCode;
 
-// A minimal stub model that uses the trait
-class StubModel
+// ── Stubs ─────────────────────────────────────────────────────────────────────
+
+// URL / plain-text model
+class StubUrlModel
 {
     use HasQrCode;
 
-    public function getKey(): mixed
+    public function qrCodeData(): string
     {
-        return 42;
+        return 'https://devxi.com/products/1';
     }
 }
 
-// A stub that overrides the encoded value
-class StubModelWithCustomValue
+// Structured data — MeCard
+class StubContactModel
 {
     use HasQrCode;
 
-    public function getKey(): mixed
-    {
-        return 1;
-    }
+    public function qrCodeType(): string { return 'meCard'; }
 
-    public function qrCodeValue(): string
+    public function qrCodeData(): array
     {
-        return 'https://devxi.com/users/1';
+        return [
+            'name'  => 'Sorto,Elmer',
+            'email' => 'elmer@devxi.com',
+        ];
     }
 }
 
-it('qrCodeValue returns model key by default', function () {
-    $model = new StubModel;
+// Model that forgets to implement qrCodeData()
+class StubUnimplementedModel
+{
+    use HasQrCode;
+}
 
-    expect($model->qrCodeValue())->toBe('42');
+// Model that returns an array but leaves $qrCodeType = 'text'
+class StubBadTypeModel
+{
+    use HasQrCode;
+
+    public function qrCodeData(): array
+    {
+        return ['name' => 'Test'];
+    }
+}
+
+// ── Tests ─────────────────────────────────────────────────────────────────────
+
+it('throws when qrCodeData() is not implemented', function () {
+    $model = new StubUnimplementedModel;
+    $model->qrCodeSvg();
+})->throws(BadMethodCallException::class, 'You must implement qrCodeData()');
+
+it('qrCodeSvg returns an SVG string for a URL model', function () {
+    $model = new StubUrlModel;
+
+    expect($model->qrCodeSvg(100))->toContain('<svg');
 });
 
-it('qrCodeValue can be overridden in the model', function () {
-    $model = new StubModelWithCustomValue;
+it('qrCodeSvg works without explicit size (uses config default)', function () {
+    $model = new StubUrlModel;
 
-    expect($model->qrCodeValue())->toBe('https://devxi.com/users/1');
+    expect($model->qrCodeSvg())->toContain('<svg');
 });
 
-it('qrCodeSvg returns an SVG string', function () {
-    $model = new StubModel;
+it('qrCodeSvg works with a structured MeCard type', function () {
+    $model = new StubContactModel;
 
-    $svg = $model->qrCodeSvg(100);
-
-    expect($svg)->toContain('<svg');
+    expect($model->qrCodeSvg(100))->toContain('<svg');
 });
 
-it('qrCodeSvg uses custom value', function () {
-    $model = new StubModelWithCustomValue;
-
-    $svg = $model->qrCodeSvg(100);
-
-    expect($svg)->toContain('<svg');
-});
-
-it('qrCodeDataUri returns a base64 data URI', function () {
-    $model = new StubModel;
+it('qrCodeDataUri returns a base64 data URI for a URL model', function () {
+    $model = new StubUrlModel;
 
     $uri = $model->qrCodeDataUri(100);
 
     expect($uri)->toStartWith('data:image/');
     expect($uri)->toContain('base64,');
 });
+
+it('qrCodeDataUri works with a structured MeCard type', function () {
+    $model = new StubContactModel;
+
+    $uri = $model->qrCodeDataUri(100);
+
+    expect($uri)->toStartWith('data:image/');
+    expect($uri)->toContain('base64,');
+});
+
+it('throws when data is an array but qrCodeType is still "text"', function () {
+    $model = new StubBadTypeModel;
+    $model->qrCodeSvg();
+})->throws(BadMethodCallException::class, '$qrCodeType is still "text"');

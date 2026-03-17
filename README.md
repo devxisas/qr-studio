@@ -1,11 +1,11 @@
-# devxisas/laravel-qrcode
+# devxisas/qr-studio
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/devxisas/laravel-qrcode.svg?style=flat-square)](https://packagist.org/packages/devxisas/laravel-qrcode)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/devxisas/laravel-qrcode/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/devxisas/laravel-qrcode/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/devxisas/laravel-qrcode.svg?style=flat-square)](https://packagist.org/packages/devxisas/laravel-qrcode)
-[![License](https://img.shields.io/packagist/l/devxisas/laravel-qrcode.svg?style=flat-square)](LICENSE)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/devxisas/qr-studio.svg?style=flat-square)](https://packagist.org/packages/devxisas/qr-studio)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/devxisas/qr-studio/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/devxisas/qr-studio/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/devxisas/qr-studio.svg?style=flat-square)](https://packagist.org/packages/devxisas/qr-studio)
+[![License](https://img.shields.io/packagist/l/devxisas/qr-studio.svg?style=flat-square)](LICENSE)
 
-A modern QR code generator for Laravel. Inspired by and built upon the foundation of [simplesoftwareio/simple-qrcode](https://github.com/SimpleSoftwareIO/simple-qrcode), this package brings full PHP 8.2+ type safety, enum-based APIs, new data types (vCard, MeCard, Calendar Events), a Blade directive, a response macro, a `toDataUri()` helper, and an Artisan command — while keeping the same familiar fluent interface.
+A modern QR code studio for Laravel. Inspired by and built upon the foundation of [simplesoftwareio/simple-qrcode](https://github.com/SimpleSoftwareIO/simple-qrcode), this package brings full PHP 8.2+ type safety, enum-based APIs, new data types (vCard, MeCard, Calendar Events), a Blade directive, a response macro, a `toDataUri()` helper, an Artisan command, and the `HasQrCode` Eloquent trait — while keeping the same familiar fluent interface.
 
 > [!NOTE]
 > **Migrating from `simplesoftwareio/simple-qrcode`?** See the [migration guide](#migrating-from-simplesoftwareiosimple-qrcode) at the bottom of this page.
@@ -25,7 +25,7 @@ A modern QR code generator for Laravel. Inspired by and built upon the foundatio
 ## Installation
 
 ```bash
-composer require devxisas/laravel-qrcode
+composer require devxisas/qr-studio
 ```
 
 The service provider is registered automatically via Laravel's package auto-discovery.
@@ -45,7 +45,7 @@ composer require ext-imagick
 Use the `QrCode` facade anywhere in your application:
 
 ```php
-use Devxisas\LaravelQrCode\Facades\QrCode;
+use Devxisas\QrStudio\Facades\QrCode;
 
 // Generate an SVG (default) — safe to render directly in Blade with {!! !!}
 $svg = QrCode::generate('https://devxi.com');
@@ -69,14 +69,14 @@ In a Blade template:
 Publish the config file to set package-wide defaults:
 
 ```bash
-php artisan vendor:publish --tag="laravel-qrcode-config"
+php artisan vendor:publish --tag="qr-studio-config"
 ```
 
-This creates `config/laravel-qrcode.php`:
+This creates `config/qr-studio.php`:
 
 ```php
-use Devxisas\LaravelQrCode\Enums\ErrorCorrection;
-use Devxisas\LaravelQrCode\Enums\Format;
+use Devxisas\QrStudio\Enums\ErrorCorrection;
+use Devxisas\QrStudio\Enums\Format;
 
 return [
     'format'           => Format::Svg,           // Format enum or 'svg' | 'eps' | 'png'
@@ -98,7 +98,7 @@ These defaults are applied to every QR code generated through the `QrCode` facad
 Three output formats are supported. You can pass a string or the `Format` enum.
 
 ```php
-use Devxisas\LaravelQrCode\Enums\Format;
+use Devxisas\QrStudio\Enums\Format;
 
 QrCode::generate('...');                          // SVG (default)
 QrCode::format('png')->generate('...');           // PNG
@@ -128,7 +128,7 @@ QrCode::size(300)->margin(4)->generate('...');
 Higher levels allow the QR code to be read even when partially obscured (e.g. with a logo overlay).
 
 ```php
-use Devxisas\LaravelQrCode\Enums\ErrorCorrection;
+use Devxisas\QrStudio\Enums\ErrorCorrection;
 
 QrCode::errorCorrection('H')->generate('...');
 QrCode::errorCorrection(ErrorCorrection::High)->generate('...');
@@ -148,7 +148,7 @@ QrCode::errorCorrection(ErrorCorrection::High)->generate('...');
 ## Module Styles
 
 ```php
-use Devxisas\LaravelQrCode\Enums\Style;
+use Devxisas\QrStudio\Enums\Style;
 
 QrCode::style('square')->generate('...');          // default
 QrCode::style('dot', 0.5)->generate('...');
@@ -165,7 +165,7 @@ QrCode::style(Style::Dot, 0.5)->generate('...');
 ## Eye Styles
 
 ```php
-use Devxisas\LaravelQrCode\Enums\EyeStyle;
+use Devxisas\QrStudio\Enums\EyeStyle;
 
 QrCode::eye('square')->generate('...');   // default
 QrCode::eye('circle')->generate('...');
@@ -222,7 +222,7 @@ QrCode::eyeColor(0, 255, 255, 255, 59, 130, 246)->generate('...');
 ## Gradients
 
 ```php
-use Devxisas\LaravelQrCode\Enums\GradientType;
+use Devxisas\QrStudio\Enums\GradientType;
 
 // gradient(startR, startG, startB, endR, endG, endB, type)
 QrCode::gradient(59, 130, 246, 168, 85, 247, 'radial')->generate('...');
@@ -304,11 +304,11 @@ A `@qrcode` directive is registered automatically.
 @qrcode('https://devxi.com', 'svg', 200)
 
 {{-- Using enums --}}
-@php use Devxisas\LaravelQrCode\Enums\Format; @endphp
+@php use Devxisas\QrStudio\Enums\Format; @endphp
 @qrcode('https://devxi.com', Format::Png, 300)
 ```
 
-When no `format` argument is passed, the directive reads `laravel-qrcode.format` from config (default `svg`). When no `size` argument is passed, the `<img>` width/height uses `laravel-qrcode.size` from config.
+When no `format` argument is passed, the directive reads `qr-studio.format` from config (default `svg`). When no `size` argument is passed, the `<img>` width/height uses `qr-studio.size` from config.
 
 SVG output is echoed directly as HTML. PNG and EPS output is wrapped in an `<img src="data:...">` tag automatically so no raw binary reaches the browser.
 
@@ -326,11 +326,11 @@ return response()->qrcode('https://devxi.com');
 return response()->qrcode('https://devxi.com', 'png', 300);
 
 // Using enum
-use Devxisas\LaravelQrCode\Enums\Format;
+use Devxisas\QrStudio\Enums\Format;
 return response()->qrcode('https://devxi.com', Format::Png, 300);
 ```
 
-When `size` is not passed, the macro uses `laravel-qrcode.size` from config. The `X-Content-Type-Options: nosniff` header is always set automatically.
+When `size` is not passed, the macro uses `qr-studio.size` from config. The `X-Content-Type-Options: nosniff` header is always set automatically.
 
 ```php
 // Route example
@@ -476,6 +476,125 @@ QrCode::calendarEvent([
 ```
 
 ![Data types — Email, Phone, SMS, Geo, WiFi, BTC, vCard, MeCard, Calendar](docs/images/data-types.png)
+
+---
+
+## HasQrCode Trait
+
+Add QR code generation directly to any Eloquent model. The trait is flexible: return a plain string for URL / text QR codes, or return an array and override `qrCodeType()` for structured data types (MeCard, vCard, WiFi, etc.).
+
+### URL / plain-text model
+
+```php
+use Devxisas\QrStudio\Traits\HasQrCode;
+
+class Product extends Model
+{
+    use HasQrCode;
+
+    public function qrCodeData(): string
+    {
+        return route('products.show', $this);
+    }
+}
+
+// In controllers or Blade:
+$product->qrCodeSvg();          // inline SVG (uses size from config)
+$product->qrCodeSvg(300);       // 300 px SVG
+$product->qrCodeDataUri();      // PNG data URI for <img src="...">
+$product->qrCodeDataUri(300);   // PNG at 300 px
+```
+
+In Blade:
+
+```blade
+{!! $product->qrCodeSvg() !!}
+<img src="{{ $product->qrCodeDataUri(200) }}" alt="Product QR">
+```
+
+### Structured data types
+
+Return an array from `qrCodeData()` and override `qrCodeType()` to match the generator's data type method:
+
+```php
+use Devxisas\QrStudio\Traits\HasQrCode;
+
+// Contact card — encodes a MeCard QR code
+class Contact extends Model
+{
+    use HasQrCode;
+
+    public function qrCodeType(): string { return 'meCard'; }
+
+    public function qrCodeData(): array
+    {
+        return [
+            'name'  => $this->last_name . ',' . $this->first_name,
+            'email' => $this->email,
+            'phone' => $this->phone ?? '',
+            'url'   => route('contacts.show', $this),
+        ];
+    }
+}
+
+// Office / venue — encodes a WiFi QR code
+class Office extends Model
+{
+    use HasQrCode;
+
+    public function qrCodeType(): string { return 'wifi'; }
+
+    public function qrCodeData(): array
+    {
+        return [
+            'encryption' => 'WPA',
+            'ssid'       => $this->wifi_ssid,
+            'password'   => $this->wifi_password,
+        ];
+    }
+}
+
+// User profile — encodes a vCard QR code
+class User extends Model
+{
+    use HasQrCode;
+
+    public function qrCodeType(): string { return 'vCard'; }
+
+    public function qrCodeData(): array
+    {
+        return [
+            'name'  => $this->last_name . ';' . $this->first_name,
+            'email' => $this->email,
+            'phone' => $this->phone ?? '',
+            'url'   => route('users.show', $this),
+        ];
+    }
+}
+```
+
+Supported `qrCodeType()` return values (must match a generator magic method):
+
+| Value           | Data type            |
+|-----------------|----------------------|
+| `meCard`        | MeCard (iOS/Android) |
+| `vCard`         | vCard 3.0            |
+| `wifi`          | WiFi network         |
+| `email`         | Email with subject/body |
+| `phoneNumber`   | Phone number         |
+| `sMS`           | SMS with body        |
+| `geo`           | GPS coordinates      |
+| `bTC`           | Bitcoin payment      |
+| `calendarEvent` | iCal event           |
+
+### Trait API
+
+| Method            | Signature                                                      | Description                                                                         |
+|-------------------|----------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `qrCodeData()`    | `qrCodeData(): string\|array`                                  | **Must be implemented.** Return a string for URL/text, or an array for structured types. Throws `BadMethodCallException` if not overridden. |
+| `qrCodeType()`    | `qrCodeType(): string`                                         | Override to set the data type when returning an array from `qrCodeData()`. Default: `'text'`. |
+| `qrCodeSvg()`     | `qrCodeSvg(int $size = 0): string`                             | Returns an inline SVG string. `$size = 0` uses the package config default.          |
+| `qrCodeDataUri()` | `qrCodeDataUri(int $size = 0, Format $format = Format::Png): string` | Returns a base64 data URI. Defaults to PNG.                                   |
 
 ---
 
@@ -1020,11 +1139,11 @@ QrCode::size(300)->format('png')->generate('...');
 All enums are backed enums so they work alongside their string equivalents.
 
 ```php
-use Devxisas\LaravelQrCode\Enums\Format;
-use Devxisas\LaravelQrCode\Enums\Style;
-use Devxisas\LaravelQrCode\Enums\EyeStyle;
-use Devxisas\LaravelQrCode\Enums\ErrorCorrection;
-use Devxisas\LaravelQrCode\Enums\GradientType;
+use Devxisas\QrStudio\Enums\Format;
+use Devxisas\QrStudio\Enums\Style;
+use Devxisas\QrStudio\Enums\EyeStyle;
+use Devxisas\QrStudio\Enums\ErrorCorrection;
+use Devxisas\QrStudio\Enums\GradientType;
 
 Format::Svg          // 'svg'
 Format::Eps          // 'eps'
@@ -1072,7 +1191,7 @@ This package was built as a modernized continuation of `simple-qrcode`. The core
 
 ```bash
 composer remove simplesoftwareio/simple-qrcode
-composer require devxisas/laravel-qrcode
+composer require devxisas/qr-studio
 ```
 
 ### Facade
@@ -1082,14 +1201,14 @@ composer require devxisas/laravel-qrcode
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 // After
-use Devxisas\LaravelQrCode\Facades\QrCode;
+use Devxisas\QrStudio\Facades\QrCode;
 ```
 
 That's usually the only change needed. All existing method calls (`generate`, `size`, `format`, `color`, `style`, `eye`, `gradient`, `merge`, etc.) work identically.
 
 ### What's new
 
-| Feature | simple-qrcode | laravel-qrcode |
+| Feature | simple-qrcode | qr-studio |
 |---------|:---:|:---:|
 | PHP 8.2+ strict types | — | ✓ |
 | Backed enums for all options | — | ✓ |
@@ -1101,6 +1220,7 @@ That's usually the only change needed. All existing method calls (`generate`, `s
 | `response()->qrcode()` macro | — | ✓ |
 | Artisan `qrcode:generate` command | — | ✓ |
 | Publishable config file | — | ✓ |
+| `HasQrCode` Eloquent trait | — | ✓ |
 | Automatic state reset after `generate()` | — | ✓ |
 | `EyeStyle::Pointy` (BaconQrCode 3.x) | — | ✓ |
 | PNG via `ext-gd` fallback (no Imagick needed) | — | ✓ |
