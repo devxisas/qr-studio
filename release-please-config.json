@@ -1,4 +1,6 @@
 {
+  "bootstrap-sha": "7e5f082",
+  "initial-version": "1.0.0",
   "packages": {
     ".": {
       "release-type": "php",
