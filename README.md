@@ -12,7 +12,7 @@ A modern QR code studio for Laravel. Inspired by and built upon the foundation o
 
 ---
 
-![Basic QR code — plain SVG output](docs/images/basic.png)
+<img src="docs/images/basic.png" width="200" alt="Basic QR code — plain SVG output">
 
 ---
 
@@ -60,7 +60,7 @@ In a Blade template:
 {!! QrCode::size(200)->generate('https://devxi.com') !!}
 ```
 
-![Basic QR code — plain SVG output](docs/images/basic.png)
+<img src="docs/images/basic.png" width="200" alt="Basic QR code — plain SVG output">
 
 ---
 
@@ -128,7 +128,7 @@ QrCode::format('eps')->generate('...');           // EPS (vector, no browser pre
 
 > **PNG and the GD fallback:** PNG generation uses `ext-imagick` when available. When Imagick is not installed the package falls back to `ext-gd`. The GD fallback works for most use cases, but gradients are not supported under GD — use Imagick if you need gradient PNGs.
 
-![Output formats — SVG, PNG, EPS](docs/images/formats.png)
+<img src="docs/images/formats.png" width="800" alt="Output formats — SVG, PNG, EPS">
 
 ---
 
@@ -139,7 +139,7 @@ QrCode::size(300)->generate('...');
 QrCode::size(300)->margin(4)->generate('...');
 ```
 
-![Size and margin variations](docs/images/size-margin.png)
+<img src="docs/images/size-margin.png" width="800" alt="Size and margin variations">
 
 ---
 
@@ -161,7 +161,7 @@ QrCode::errorCorrection(ErrorCorrection::High)->generate('...');
 | `Q`   | `ErrorCorrection::Quartile` | 25%           |
 | `H`   | `ErrorCorrection::High`     | 30%           |
 
-![Error correction levels L / M / Q / H](docs/images/error-correction.png)
+<img src="docs/images/error-correction.png" width="800" alt="Error correction levels L / M / Q / H">
 
 ---
 
@@ -178,7 +178,7 @@ QrCode::style('round', 0.7)->generate('...');
 QrCode::style(Style::Dot, 0.5)->generate('...');
 ```
 
-![Module styles — Square, Dot, Round](docs/images/styles.png)
+<img src="docs/images/styles.png" width="800" alt="Module styles — Square, Dot, Round">
 
 ---
 
@@ -202,7 +202,7 @@ QrCode::eye(EyeStyle::Pointy)->generate('...');
 | `circle` | `EyeStyle::Circle` | Circular finder eye                                  |
 | `pointy` | `EyeStyle::Pointy` | Curved outer corner + circle inner (BaconQrCode 3.x) |
 
-![Eye styles — Square, Circle, Pointy](docs/images/eyes.png)
+<img src="docs/images/eyes.png" width="800" alt="Eye styles — Square, Circle, Pointy">
 
 ---
 
@@ -233,9 +233,9 @@ QrCode::eyeColor(0, 239, 68, 68)           // eye 0 — red (inner = outer)
 QrCode::eyeColor(0, 255, 255, 255, 59, 130, 246)->generate('...');
 ```
 
-![Foreground and background colors](docs/images/colors.png)
+<img src="docs/images/colors.png" width="800" alt="Foreground and background colors">
 
-![Per-eye color customization](docs/images/eye-colors.png)
+<img src="docs/images/eye-colors.png" width="800" alt="Per-eye color customization">
 
 ---
 
@@ -261,7 +261,7 @@ QrCode::gradient(59, 130, 246, 168, 85, 247, GradientType::Radial)->generate('..
 
 > **Note:** Gradients require `ext-imagick`. They are not supported when falling back to `ext-gd`.
 
-![Gradient types — horizontal, vertical, diagonal, inverse diagonal, radial](docs/images/gradients.png)
+<img src="docs/images/gradients.png" width="800" alt="Gradient types — horizontal, vertical, diagonal, inverse diagonal, radial">
 
 ---
 
@@ -285,7 +285,7 @@ QrCode::format('png')
 
 The second argument is the percentage of the QR code the image should occupy (default `0.2`).
 
-![Logo overlay on PNG QR code](docs/images/merge.png)
+<img src="docs/images/merge.png" width="800" alt="Logo overlay on PNG QR code">
 
 ---
 
@@ -308,7 +308,7 @@ In Blade:
 <img src="{{ QrCode::size(200)->toDataUri('https://devxi.com') }}" alt="QR Code">
 ```
 
-![toDataUri — SVG and PNG data URI examples](docs/images/data-uri.png)
+<img src="docs/images/data-uri.png" width="800" alt="toDataUri — SVG and PNG data URI examples">
 
 ---
 
@@ -508,7 +508,7 @@ QrCode::whatsApp('+50312345678', '¡Hola! Vi tu QR y quiero más información.')
 
 The phone number is normalised to digits only — international format is required (`+503` → `503`).
 
-![Data types — Email, Phone, SMS, Geo, WiFi, BTC, vCard, MeCard, Calendar, WhatsApp](docs/images/data-types.png)
+<img src="docs/images/data-types.png" width="800" alt="Data types — Email, Phone, SMS, Geo, WiFi, BTC, vCard, MeCard, Calendar, WhatsApp">
 
 
 ---
@@ -541,7 +541,7 @@ QrCode::theme('ocean')->size(300)->eye('square')->generate('...');
 
 > **Note:** Themes that use `dot` or `round` modules automatically set `errorCorrection('H')` to ensure scannability.
 
-![Built-in themes — ocean, sunset, forest, midnight, coral](docs/images/themes.png)
+<img src="docs/images/themes.png" width="800" alt="Built-in themes — ocean, sunset, forest, midnight, coral">
 
 ---
 
@@ -739,7 +739,7 @@ QrCode::size(250)
       ->generate('https://devxi.com');
 ```
 
-![Combination examples — dot+gradient, round+color, full dark theme](docs/images/combinations.png)
+<img src="docs/images/combinations.png" width="800" alt="Combination examples — dot+gradient, round+color, full dark theme">
 
 ---
 
