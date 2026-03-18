@@ -18,9 +18,9 @@ A modern QR code studio for Laravel. Inspired by and built upon the foundation o
 
 ## Requirements
 
-| Package version | Laravel      | PHP   |
-|-----------------|--------------|-------|
-| 1.x             | 11, 12, 13   | 8.2+  |
+| Package version | Laravel    | PHP  |
+| --------------- | ---------- | ---- |
+| 1.x             | 11, 12, 13 | 8.2+ |
 
 ## Installation
 
@@ -98,16 +98,16 @@ return [
 
 These defaults are applied to every QR code generated through the `QrCode` facade, the `@qrcode` Blade directive, and the `response()->qrcode()` macro. Per-call options always take precedence over config defaults.
 
-| Key | Scope | Default |
-|-----|-------|---------|
-| `format` | Global | `Format::Svg` |
-| `size` | Global | `100` |
-| `margin` | Global | `0` |
-| `error_correction` | Global | `ErrorCorrection::Medium` |
-| `encoding` | Global | `'UTF-8'` |
-| `theme` | Global | `null` (disabled) |
-| `disk` | saveToDisk | `'local'` |
-| `path` | saveToDisk | `'qrcodes'` |
+| Key                | Scope      | Default                   |
+| ------------------ | ---------- | ------------------------- |
+| `format`           | Global     | `Format::Svg`             |
+| `size`             | Global     | `100`                     |
+| `margin`           | Global     | `0`                       |
+| `error_correction` | Global     | `ErrorCorrection::Medium` |
+| `encoding`         | Global     | `'UTF-8'`                 |
+| `theme`            | Global     | `null` (disabled)         |
+| `disk`             | saveToDisk | `'local'`                 |
+| `path`             | saveToDisk | `'qrcodes'`               |
 
 > **Note:** `style`, `eye`, `color`, `gradient`, and `eyeColor` are always per-call — they are not configurable globally as they are visual choices that vary per use case.
 
@@ -155,7 +155,7 @@ QrCode::errorCorrection(ErrorCorrection::High)->generate('...');
 ```
 
 | Level | Enum                        | Data recovery |
-|-------|-----------------------------|---------------|
+| ----- | --------------------------- | ------------- |
 | `L`   | `ErrorCorrection::Low`      | 7%            |
 | `M`   | `ErrorCorrection::Medium`   | 15% (default) |
 | `Q`   | `ErrorCorrection::Quartile` | 25%           |
@@ -196,11 +196,11 @@ QrCode::eye(EyeStyle::Circle)->generate('...');
 QrCode::eye(EyeStyle::Pointy)->generate('...');
 ```
 
-| Value      | Enum               | Description                                      |
-|------------|--------------------|--------------------------------------------------|
-| `square`   | `EyeStyle::Square` | Default square finder eye                        |
-| `circle`   | `EyeStyle::Circle` | Circular finder eye                              |
-| `pointy`   | `EyeStyle::Pointy` | Curved outer corner + circle inner (BaconQrCode 3.x) |
+| Value    | Enum               | Description                                          |
+| -------- | ------------------ | ---------------------------------------------------- |
+| `square` | `EyeStyle::Square` | Default square finder eye                            |
+| `circle` | `EyeStyle::Circle` | Circular finder eye                                  |
+| `pointy` | `EyeStyle::Pointy` | Curved outer corner + circle inner (BaconQrCode 3.x) |
 
 ![Eye styles — Square, Circle, Pointy](docs/images/eyes.png)
 
@@ -251,13 +251,13 @@ QrCode::gradient(59, 130, 246, 168, 85, 247, 'radial')->generate('...');
 QrCode::gradient(59, 130, 246, 168, 85, 247, GradientType::Radial)->generate('...');
 ```
 
-| Type               | Enum                             |
-|--------------------|----------------------------------|
-| `horizontal`       | `GradientType::Horizontal`       |
-| `vertical`         | `GradientType::Vertical`         |
-| `diagonal`         | `GradientType::Diagonal`         |
-| `inverse_diagonal` | `GradientType::InverseDiagonal`  |
-| `radial`           | `GradientType::Radial`           |
+| Type               | Enum                            |
+| ------------------ | ------------------------------- |
+| `horizontal`       | `GradientType::Horizontal`      |
+| `vertical`         | `GradientType::Vertical`        |
+| `diagonal`         | `GradientType::Diagonal`        |
+| `inverse_diagonal` | `GradientType::InverseDiagonal` |
+| `radial`           | `GradientType::Radial`          |
 
 > **Note:** Gradients require `ext-imagick`. They are not supported when falling back to `ext-gd`.
 
@@ -379,13 +379,13 @@ php artisan qrcode:generate "https://devxi.com" \
     --output=/path/to/output.svg
 ```
 
-| Option               | Default | Values             |
-|----------------------|---------|--------------------|
-| `--format`           | `svg`   | `svg`, `eps`, `png`|
-| `--size`             | `200`   | 1–4096             |
-| `--margin`           | `0`     | integer            |
-| `--error-correction` | `M`     | `L`, `M`, `Q`, `H` |
-| `--output`           | stdout  | file path          |
+| Option               | Default | Values              |
+| -------------------- | ------- | ------------------- |
+| `--format`           | `svg`   | `svg`, `eps`, `png` |
+| `--size`             | `200`   | 1–4096              |
+| `--margin`           | `0`     | integer             |
+| `--error-correction` | `M`     | `L`, `M`, `Q`, `H`  |
+| `--output`           | stdout  | file path           |
 
 ---
 
@@ -510,6 +510,7 @@ The phone number is normalised to digits only — international format is requir
 
 ![Data types — Email, Phone, SMS, Geo, WiFi, BTC, vCard, MeCard, Calendar, WhatsApp](docs/images/data-types.png)
 
+
 ---
 
 ## Themes
@@ -530,13 +531,13 @@ QrCode::theme('ocean')->size(300)->eye('square')->generate('...');
 'theme' => Theme::Midnight,
 ```
 
-| Theme | Description |
-|-------|-------------|
-| `ocean` | Deep blue → cyan radial gradient · dot modules · circle eyes |
-| `sunset` | Orange → crimson diagonal gradient · square eyes |
-| `forest` | Dark green → mint vertical gradient · round modules · square eyes |
-| `midnight` | Light blue-white text on deep navy background |
-| `coral` | Coral → hot-pink horizontal gradient · dot modules · circle eyes |
+| Theme      | Description                                                       |
+| ---------- | ----------------------------------------------------------------- |
+| `ocean`    | Deep blue → cyan radial gradient · dot modules · circle eyes      |
+| `sunset`   | Orange → crimson diagonal gradient · square eyes                  |
+| `forest`   | Dark green → mint vertical gradient · round modules · square eyes |
+| `midnight` | Light blue-white text on deep navy background                     |
+| `coral`    | Coral → hot-pink horizontal gradient · dot modules · circle eyes  |
 
 > **Note:** Themes that use `dot` or `round` modules automatically set `errorCorrection('H')` to ensure scannability.
 
@@ -592,7 +593,6 @@ $document->saveQrCodeToDisk('001F.png', 's3');            // override disk
 $user->saveQrCodeToDisk('contacts/elmer.png', null, Format::Svg);  // SVG
 ```
 
-![saveToDisk — code example](docs/images/save-to-disk.png)
 
 ---
 
@@ -692,26 +692,26 @@ class User extends Model
 
 Supported `qrCodeType()` return values (must match a generator magic method):
 
-| Value           | Data type            |
-|-----------------|----------------------|
-| `meCard`        | MeCard (iOS/Android) |
-| `vCard`         | vCard 3.0            |
-| `wifi`          | WiFi network         |
+| Value           | Data type               |
+| --------------- | ----------------------- |
+| `meCard`        | MeCard (iOS/Android)    |
+| `vCard`         | vCard 3.0               |
+| `wifi`          | WiFi network            |
 | `email`         | Email with subject/body |
-| `phoneNumber`   | Phone number         |
-| `sMS`           | SMS with body        |
-| `geo`           | GPS coordinates      |
-| `bTC`           | Bitcoin payment      |
-| `calendarEvent` | iCal event           |
+| `phoneNumber`   | Phone number            |
+| `sMS`           | SMS with body           |
+| `geo`           | GPS coordinates         |
+| `bTC`           | Bitcoin payment         |
+| `calendarEvent` | iCal event              |
 
 ### Trait API
 
-| Method            | Signature                                                      | Description                                                                         |
-|-------------------|----------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| `qrCodeData()`    | `qrCodeData(): string\|array`                                  | **Must be implemented.** Return a string for URL/text, or an array for structured types. Throws `BadMethodCallException` if not overridden. |
-| `qrCodeType()`    | `qrCodeType(): string`                                         | Override to set the data type when returning an array from `qrCodeData()`. Default: `'text'`. |
-| `qrCodeSvg()`     | `qrCodeSvg(int $size = 0): string`                             | Returns an inline SVG string. `$size = 0` uses the package config default.          |
-| `qrCodeDataUri()` | `qrCodeDataUri(int $size = 0, Format $format = Format::Png): string` | Returns a base64 data URI. Defaults to PNG.                                   |
+| Method            | Signature                                                            | Description                                                                                                                                 |
+| ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `qrCodeData()`    | `qrCodeData(): string\|array`                                        | **Must be implemented.** Return a string for URL/text, or an array for structured types. Throws `BadMethodCallException` if not overridden. |
+| `qrCodeType()`    | `qrCodeType(): string`                                               | Override to set the data type when returning an array from `qrCodeData()`. Default: `'text'`.                                               |
+| `qrCodeSvg()`     | `qrCodeSvg(int $size = 0): string`                                   | Returns an inline SVG string. `$size = 0` uses the package config default.                                                                  |
+| `qrCodeDataUri()` | `qrCodeDataUri(int $size = 0, Format $format = Format::Png): string` | Returns a base64 data URI. Defaults to PNG.                                                                                                 |
 
 ---
 
@@ -739,7 +739,7 @@ QrCode::size(250)
       ->generate('https://devxi.com');
 ```
 
-![Combination examples — dot+gradient, round+color, full dark theme](docs/images/combos.png)
+![Combination examples — dot+gradient, round+color, full dark theme](docs/images/combinations.png)
 
 ---
 
@@ -755,10 +755,10 @@ Complete reference for all public methods on `QrCodeGenerator` (accessed via the
 
 **Parameters:**
 
-| Name        | Type      | Required | Description                                      |
-|-------------|-----------|----------|--------------------------------------------------|
-| `$text`     | `string`  | Yes      | The content to encode in the QR code             |
-| `$filename` | `?string` | No       | Absolute path to write the output file           |
+| Name        | Type      | Required | Description                            |
+| ----------- | --------- | -------- | -------------------------------------- |
+| `$text`     | `string`  | Yes      | The content to encode in the QR code   |
+| `$filename` | `?string` | No       | Absolute path to write the output file |
 
 **Exceptions:** `WriterException` if the underlying BaconQrCode writer fails.
 
@@ -785,9 +785,9 @@ QrCode::format('png')->size(300)->generate('https://devxi.com', '/var/www/qr.png
 
 **Parameters:**
 
-| Name    | Type     | Required | Description             |
-|---------|----------|----------|-------------------------|
-| `$text` | `string` | Yes      | The content to encode   |
+| Name    | Type     | Required | Description           |
+| ------- | -------- | -------- | --------------------- |
+| `$text` | `string` | Yes      | The content to encode |
 
 **Exceptions:** `WriterException` if the underlying writer fails.
 
@@ -811,9 +811,9 @@ $uri = QrCode::size(200)->toDataUri('https://devxi.com');
 
 **Parameters:**
 
-| Name      | Type               | Required | Description                        |
-|-----------|--------------------|----------|------------------------------------|
-| `$format` | `Format\|string`   | Yes      | Output format: `svg`, `eps`, `png` |
+| Name      | Type             | Required | Description                        |
+| --------- | ---------------- | -------- | ---------------------------------- |
+| `$format` | `Format\|string` | Yes      | Output format: `svg`, `eps`, `png` |
 
 **Exceptions:** `InvalidArgumentException` if a string other than `svg`, `eps`, or `png` is passed.
 
@@ -834,9 +834,9 @@ QrCode::format(Format::Png)->generate('...');
 
 **Parameters:**
 
-| Name      | Type  | Required | Description                      |
-|-----------|-------|----------|----------------------------------|
-| `$pixels` | `int` | Yes      | Size in pixels (minimum: 1)      |
+| Name      | Type  | Required | Description                 |
+| --------- | ----- | -------- | --------------------------- |
+| `$pixels` | `int` | Yes      | Size in pixels (minimum: 1) |
 
 **Exceptions:** `InvalidArgumentException` if `$pixels` is less than 1.
 
@@ -857,7 +857,7 @@ QrCode::size(300)->generate('...');
 **Parameters:**
 
 | Name      | Type  | Required | Description                        |
-|-----------|-------|----------|------------------------------------|
+| --------- | ----- | -------- | ---------------------------------- |
 | `$margin` | `int` | Yes      | Quiet zone width in pixels (min 0) |
 
 **Exceptions:** `InvalidArgumentException` if `$margin` is negative.
@@ -879,7 +879,7 @@ QrCode::size(300)->margin(4)->generate('...');
 **Parameters:**
 
 | Name        | Type     | Required | Description                       |
-|-------------|----------|----------|-----------------------------------|
+| ----------- | -------- | -------- | --------------------------------- |
 | `$encoding` | `string` | Yes      | Character encoding (e.g. `UTF-8`) |
 
 **Example:**
@@ -898,9 +898,9 @@ QrCode::encoding('ISO-8859-1')->generate('...');
 
 **Parameters:**
 
-| Name               | Type                        | Required | Description                          |
-|--------------------|-----------------------------|----------|--------------------------------------|
-| `$errorCorrection` | `ErrorCorrection\|string`   | Yes      | Error correction level: L, M, Q or H |
+| Name               | Type                      | Required | Description                          |
+| ------------------ | ------------------------- | -------- | ------------------------------------ |
+| `$errorCorrection` | `ErrorCorrection\|string` | Yes      | Error correction level: L, M, Q or H |
 
 **Exceptions:** `InvalidArgumentException` if a string other than `L`, `M`, `Q`, or `H` is passed.
 
@@ -923,10 +923,10 @@ QrCode::errorCorrection(ErrorCorrection::High)->generate('...');
 
 **Parameters:**
 
-| Name     | Type             | Required | Description                                     |
-|----------|------------------|----------|-------------------------------------------------|
-| `$style` | `Style\|string`  | Yes      | Module style: `square`, `dot`, or `round`       |
-| `$size`  | `float`          | No       | Fill ratio, must be > 0 and < 1. Default: `0.5` |
+| Name     | Type            | Required | Description                                     |
+| -------- | --------------- | -------- | ----------------------------------------------- |
+| `$style` | `Style\|string` | Yes      | Module style: `square`, `dot`, or `round`       |
+| `$size`  | `float`         | No       | Fill ratio, must be > 0 and < 1. Default: `0.5` |
 
 **Exceptions:** `InvalidArgumentException` if an invalid style string is passed, or if `$size` is `>= 1` or `<= 0`.
 
@@ -952,9 +952,9 @@ QrCode::style('dot', 0.5)->generate('...');
 
 **Parameters:**
 
-| Name     | Type                  | Required | Description                                     |
-|----------|-----------------------|----------|-------------------------------------------------|
-| `$style` | `EyeStyle\|string`    | Yes      | Eye style: `square`, `circle`, or `pointy`      |
+| Name     | Type               | Required | Description                                |
+| -------- | ------------------ | -------- | ------------------------------------------ |
+| `$style` | `EyeStyle\|string` | Yes      | Eye style: `square`, `circle`, or `pointy` |
 
 **Exceptions:** `InvalidArgumentException` if a string other than `square`, `circle`, or `pointy` is passed.
 
@@ -978,12 +978,12 @@ QrCode::style('dot', 0.5)->eye('square')->errorCorrection('H')->generate('...');
 
 **Parameters:**
 
-| Name     | Type   | Required | Description                          |
-|----------|--------|----------|--------------------------------------|
-| `$red`   | `int`  | Yes      | Red channel (0–255)                  |
-| `$green` | `int`  | Yes      | Green channel (0–255)                |
-| `$blue`  | `int`  | Yes      | Blue channel (0–255)                 |
-| `$alpha` | `?int` | No       | Alpha (0 = opaque, 127 = transparent)|
+| Name     | Type   | Required | Description                           |
+| -------- | ------ | -------- | ------------------------------------- |
+| `$red`   | `int`  | Yes      | Red channel (0–255)                   |
+| `$green` | `int`  | Yes      | Green channel (0–255)                 |
+| `$blue`  | `int`  | Yes      | Blue channel (0–255)                  |
+| `$alpha` | `?int` | No       | Alpha (0 = opaque, 127 = transparent) |
 
 **Example:**
 
@@ -1002,12 +1002,12 @@ QrCode::color(59, 130, 246, 50)->generate('...');  // semi-transparent
 
 **Parameters:**
 
-| Name     | Type   | Required | Description                          |
-|----------|--------|----------|--------------------------------------|
-| `$red`   | `int`  | Yes      | Red channel (0–255)                  |
-| `$green` | `int`  | Yes      | Green channel (0–255)                |
-| `$blue`  | `int`  | Yes      | Blue channel (0–255)                 |
-| `$alpha` | `?int` | No       | Alpha (0 = opaque, 127 = transparent)|
+| Name     | Type   | Required | Description                           |
+| -------- | ------ | -------- | ------------------------------------- |
+| `$red`   | `int`  | Yes      | Red channel (0–255)                   |
+| `$green` | `int`  | Yes      | Green channel (0–255)                 |
+| `$blue`  | `int`  | Yes      | Blue channel (0–255)                  |
+| `$alpha` | `?int` | No       | Alpha (0 = opaque, 127 = transparent) |
 
 **Example:**
 
@@ -1026,7 +1026,7 @@ QrCode::color(255, 255, 255)->backgroundColor(15, 23, 42)->generate('...');
 **Parameters:**
 
 | Name          | Type  | Required | Description                             |
-|---------------|-------|----------|-----------------------------------------|
+| ------------- | ----- | -------- | --------------------------------------- |
 | `$eyeNumber`  | `int` | Yes      | Eye index: 0, 1, or 2                   |
 | `$innerRed`   | `int` | Yes      | Inner dot red channel (0–255)           |
 | `$innerGreen` | `int` | Yes      | Inner dot green channel (0–255)         |
@@ -1059,15 +1059,15 @@ QrCode::eyeColor(0, 255, 255, 255, 59, 130, 246)->generate('...');
 
 **Parameters:**
 
-| Name      | Type                       | Required | Description                                         |
-|-----------|----------------------------|----------|-----------------------------------------------------|
-| `$startR` | `int`                      | Yes      | Start color red channel (0–255)                     |
-| `$startG` | `int`                      | Yes      | Start color green channel (0–255)                   |
-| `$startB` | `int`                      | Yes      | Start color blue channel (0–255)                    |
-| `$endR`   | `int`                      | Yes      | End color red channel (0–255)                       |
-| `$endG`   | `int`                      | Yes      | End color green channel (0–255)                     |
-| `$endB`   | `int`                      | Yes      | End color blue channel (0–255)                      |
-| `$type`   | `GradientType\|string`     | Yes      | Gradient direction/shape (see Enum Reference below) |
+| Name      | Type                   | Required | Description                                         |
+| --------- | ---------------------- | -------- | --------------------------------------------------- |
+| `$startR` | `int`                  | Yes      | Start color red channel (0–255)                     |
+| `$startG` | `int`                  | Yes      | Start color green channel (0–255)                   |
+| `$startB` | `int`                  | Yes      | Start color blue channel (0–255)                    |
+| `$endR`   | `int`                  | Yes      | End color red channel (0–255)                       |
+| `$endG`   | `int`                  | Yes      | End color green channel (0–255)                     |
+| `$endB`   | `int`                  | Yes      | End color blue channel (0–255)                      |
+| `$type`   | `GradientType\|string` | Yes      | Gradient direction/shape (see Enum Reference below) |
 
 **Exceptions:** `InvalidArgumentException` if an invalid gradient type string is passed. `RuntimeException` at render time if PNG format is used without `ext-imagick`.
 
@@ -1090,9 +1090,9 @@ QrCode::gradient(59, 130, 246, 168, 85, 247, GradientType::Radial)->generate('..
 
 **Parameters:**
 
-| Name     | Type               | Required | Description                          |
-|----------|--------------------|----------|--------------------------------------|
-| `$theme` | `Theme\|string`    | Yes      | Theme name or `Theme` enum case      |
+| Name     | Type            | Required | Description                     |
+| -------- | --------------- | -------- | ------------------------------- |
+| `$theme` | `Theme\|string` | Yes      | Theme name or `Theme` enum case |
 
 **Exceptions:** `InvalidArgumentException` if an unrecognised theme name is passed.
 
@@ -1122,11 +1122,11 @@ QrCode::theme(Theme::Sunset)->size(300)->color(0, 0, 0)->generate('...');
 
 **Parameters:**
 
-| Name        | Type      | Required | Description                                                  |
-|-------------|-----------|----------|--------------------------------------------------------------|
-| `$text`     | `string`  | Yes      | The content to encode in the QR code                        |
+| Name        | Type      | Required | Description                                                |
+| ----------- | --------- | -------- | ---------------------------------------------------------- |
+| `$text`     | `string`  | Yes      | The content to encode in the QR code                       |
 | `$filename` | `string`  | Yes      | Storage path (e.g. `'user-42.png'` or `'invoices/qr.svg'`) |
-| `$disk`     | `?string` | No       | Filesystem disk name. `null` = use config default           |
+| `$disk`     | `?string` | No       | Filesystem disk name. `null` = use config default          |
 
 **Returns:** `string` — the storage path where the file was saved.
 
@@ -1160,10 +1160,10 @@ QrCode::theme('ocean')->format('png')->size(400)->saveToDisk('https://devxi.com'
 
 **Parameters:**
 
-| Name          | Type     | Required | Description                                            |
-|---------------|----------|----------|--------------------------------------------------------|
-| `$filepath`   | `string` | Yes      | Path to the image file                                 |
-| `$percentage` | `float`  | No       | Logo size as fraction of QR width. Default: `0.2`      |
+| Name          | Type     | Required | Description                                                |
+| ------------- | -------- | -------- | ---------------------------------------------------------- |
+| `$filepath`   | `string` | Yes      | Path to the image file                                     |
+| `$percentage` | `float`  | No       | Logo size as fraction of QR width. Default: `0.2`          |
 | `$absolute`   | `bool`   | No       | If `true`, skip `base_path()` prepending. Default: `false` |
 
 **Exceptions:** `InvalidArgumentException` if the file cannot be read.
@@ -1187,10 +1187,10 @@ QrCode::format('png')
 
 **Parameters:**
 
-| Name          | Type     | Required | Description                                         |
-|---------------|----------|----------|-----------------------------------------------------|
-| `$content`    | `string` | Yes      | Binary image content                                |
-| `$percentage` | `float`  | No       | Logo size as fraction of QR width. Default: `0.2`   |
+| Name          | Type     | Required | Description                                       |
+| ------------- | -------- | -------- | ------------------------------------------------- |
+| `$content`    | `string` | Yes      | Binary image content                              |
+| `$percentage` | `float`  | No       | Logo size as fraction of QR width. Default: `0.2` |
 
 **Example:**
 
@@ -1404,30 +1404,30 @@ That's usually the only change needed. All existing method calls (`generate`, `s
 
 ### What's new
 
-| Feature | simple-qrcode | qr-studio |
-|---------|:---:|:---:|
-| PHP 8.2+ strict types | — | ✓ |
-| Backed enums for all options | — | ✓ |
-| `toDataUri()` | — | ✓ |
-| vCard 3.0 data type | — | ✓ |
-| MeCard data type | — | ✓ |
-| Calendar Event data type | — | ✓ |
-| `@qrcode` Blade directive | — | ✓ |
-| `response()->qrcode()` macro | — | ✓ |
-| Artisan `qrcode:generate` command | — | ✓ |
-| Publishable config file | — | ✓ |
-| `HasQrCode` Eloquent trait | — | ✓ |
-| Automatic state reset after `generate()` | — | ✓ |
-| `EyeStyle::Pointy` (BaconQrCode 3.x) | — | ✓ |
-| PNG via `ext-gd` fallback (no Imagick needed) | — | ✓ |
-| WhatsApp data type | — | ✓ |
-| Built-in visual themes (ocean, sunset, forest…) | — | ✓ |
-| `saveToDisk()` — persist to any filesystem disk | — | ✓ |
-| Laravel 11 / 12 / 13 support | ✓ | ✓ |
-| SVG / EPS / PNG formats | ✓ | ✓ |
-| Image merging (logo overlay) | ✓ | ✓ |
-| Colors, gradients, eye colors | ✓ | ✓ |
-| Email, Phone, SMS, Geo, WiFi, BTC | ✓ | ✓ |
+| Feature                                         | simple-qrcode | qr-studio |
+| ----------------------------------------------- | :-----------: | :-------: |
+| PHP 8.2+ strict types                           |       —       |     ✓     |
+| Backed enums for all options                    |       —       |     ✓     |
+| `toDataUri()`                                   |       —       |     ✓     |
+| vCard 3.0 data type                             |       —       |     ✓     |
+| MeCard data type                                |       —       |     ✓     |
+| Calendar Event data type                        |       —       |     ✓     |
+| `@qrcode` Blade directive                       |       —       |     ✓     |
+| `response()->qrcode()` macro                    |       —       |     ✓     |
+| Artisan `qrcode:generate` command               |       —       |     ✓     |
+| Publishable config file                         |       —       |     ✓     |
+| `HasQrCode` Eloquent trait                      |       —       |     ✓     |
+| Automatic state reset after `generate()`        |       —       |     ✓     |
+| `EyeStyle::Pointy` (BaconQrCode 3.x)            |       —       |     ✓     |
+| PNG via `ext-gd` fallback (no Imagick needed)   |       —       |     ✓     |
+| WhatsApp data type                              |       —       |     ✓     |
+| Built-in visual themes (ocean, sunset, forest…) |       —       |     ✓     |
+| `saveToDisk()` — persist to any filesystem disk |       —       |     ✓     |
+| Laravel 11 / 12 / 13 support                    |       ✓       |     ✓     |
+| SVG / EPS / PNG formats                         |       ✓       |     ✓     |
+| Image merging (logo overlay)                    |       ✓       |     ✓     |
+| Colors, gradients, eye colors                   |       ✓       |     ✓     |
+| Email, Phone, SMS, Geo, WiFi, BTC               |       ✓       |     ✓     |
 
 ---
 
